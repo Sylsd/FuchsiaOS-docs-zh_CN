@@ -1,14 +1,31 @@
+<!-- 
 # GN Build Arguments
 
 ## All builds
+ -->
 
+# GN 构建参数
+
+## 适用于所有构建的参数
+
+<!--
 ### acpica_debug_output
 Enable debug output in the ACPI library (used by the ACPI bus driver).
 
 **Current value (from the default):** `false`
 
 From [//third_party/acpica/BUILD.gn:9](https://fuchsia.googlesource.com/third_party/acpica/+/d7bd2596db70275e5f0d0dab6e538c4d46a4cb54/BUILD.gn#9)
+-->
 
+### acpica_debug_output
+
+在 ACPI 库中启用调试输出（该参数由 ACPI 总线驱动调用）。
+
+**当前值（默认值）：** `false`
+
+参见 [//third_party/acpica/BUILD.gn:9](https://fuchsia.googlesource.com/third_party/acpica/+/d7bd2596db70275e5f0d0dab6e538c4d46a4cb54/BUILD.gn#9)。
+
+<!--
 ### active_partition
 
 **Current value (from the default):** `""`
@@ -22,7 +39,23 @@ archives.
 **Current value (from the default):** `false`
 
 From //build/images/args.gni:88
+-->
 
+### active_partition
+
+**当前值（默认值）：** `""`
+
+参见 //build/images/args.gni:82
+
+### add_qemu_to_build_archives
+
+是否在构建档案中包含在 QEMU 中运行 Fuchsia 所需的镜像。
+
+**当前值（默认值）：** `false`
+
+参见 //build/images/args.gni:88
+
+<!--
 ### additional_bootserver_arguments
 Additional bootserver args to add to pave.sh. New uses of this should be
 added with caution, and ideally discussion. The present use case is to
@@ -31,15 +64,35 @@ with specific boards, due to driver and hardware challenges.
 
 **Current value (from the default):** `""`
 
-From //build/images/args.gni:94
+From //build/images/args.gni:94 
+-->
 
+### additional_bootserver_arguments
+
+向 pave.sh 中添加的 bootserver 附加参数。 初次使用，请慎重考虑和讨论后，添加该参数。当前使用案例为：为应对驱动和硬件的挑战，在特定网络适配器和特定版型结合时，限制网络引导功能。
+
+**当前值（默认值）：** `""`
+
+参见 //build/images/args.gni:94 
+
+<!--
 ### all_font_file_paths
 List of file paths to every font asset. Populated in fonts.gni.
 
 **Current value (from the default):** `[]`
 
 From //src/fonts/build/font_args.gni:35
+-->
 
+### all_font_file_paths
+
+列出所有字体资源的文件路径。并将其填充到 fonts.gni 文件中。
+
+**当前值（默认值）：** `[]`
+
+参见 //src/fonts/build/font_args.gni:35
+
+<!--
 ### all_toolchain_variants
 *These should never be set as a build argument.*
 It will be set below and passed to other toolchains through toolchain_args
@@ -48,7 +101,17 @@ It will be set below and passed to other toolchains through toolchain_args
 **Current value (from the default):** `[]`
 
 From //build/config/BUILDCONFIG.gn:1594
+-->
 
+### all_toolchain_variants
+*请勿用于构建参数。*
+参数将会在下方设置，并通过 toolchain_args 将参数传递给其他工具链（参见 variant_toolchain.gni）。
+
+**当前值（默认值）：** `[]`
+
+参见 //build/config/BUILDCONFIG.gn:1594
+
+<!--
 ### always_zedboot
 Build boot images that prefer Zedboot over local boot (only for EFI).
 
@@ -62,14 +125,40 @@ TODO(fxbug.dev/67565) - remove once external FD extensions fully supported
 **Current value (from the default):** `false`
 
 From [//third_party/mesa/src/intel/vulkan/BUILD.gn:27](https://fuchsia.googlesource.com/third_party/mesa/+/6bd48dbb676e48ccc12395cfaae4d167a534eb14/src/intel/vulkan/BUILD.gn#27)
+-->
 
+### always_zedboot
+
+优先使用 Zedboot 构建 boot 镜像，而不是本地 boot（仅限 EFI）。
+
+**当前值（默认值）：** `false`
+
+参见 //build/images/args.gni:109
+
+### anv_enable_external_fd
+TODO(fxbug.dev/67565) - 在外部 FD 扩展完全支持后，应立即删除此参数。
+
+**当前值（默认值）：** `false`
+
+参见 [//third_party/mesa/src/intel/vulkan/BUILD.gn:27](https://fuchsia.googlesource.com/third_party/mesa/+/6bd48dbb676e48ccc12395cfaae4d167a534eb14/src/intel/vulkan/BUILD.gn#27)。
+
+<!--
 ### anv_use_max_ram
 Give maximum possible memory to Vulkan heap
 
 **Current value (from the default):** `false`
 
 From [//third_party/mesa/src/intel/vulkan/BUILD.gn:30](https://fuchsia.googlesource.com/third_party/mesa/+/6bd48dbb676e48ccc12395cfaae4d167a534eb14/src/intel/vulkan/BUILD.gn#30)
+-->
 
+### anv_use_max_ram
+设定 Vulkan 堆内存可能使用的最大值。
+
+**当前值（默认值）：** `false`
+
+参见 [//third_party/mesa/src/intel/vulkan/BUILD.gn:30](https://fuchsia.googlesource.com/third_party/mesa/+/6bd48dbb676e48ccc12395cfaae4d167a534eb14/src/intel/vulkan/BUILD.gn#30)
+
+<!--
 ### asan_default_options
 Default [AddressSanitizer](https://clang.llvm.org/docs/AddressSanitizer.html)
 options (before the `ASAN_OPTIONS` environment variable is read at
@@ -85,7 +174,19 @@ injected that way can override that option's setting in this list.
 **Current value (from the default):** `["detect_stack_use_after_return=1", "quarantine_size_mb=64"]`
 
 From //build/config/sanitizers/sanitizer_default_options.gni:16
+-->
 
+### asan_default_options
+
+默认 [AddressSanitizer](https://clang.llvm.org/docs/AddressSanitizer.html) 选项（该参数在运行时读取环境变量 `ASAN_OPTIONS` 之前被加载）。该参数可以作为构建参数以影响 $variants 中的大多数“asan”变体，或者覆盖这些变体中的 $toolchain_args 参数。
+
+请注意，即使此参数值留空， 当前构建中的程序也**不能**定义自己的 `__asan_default_options` C 函数。取而代之的是，这些程序可以在他们的 `deps` 中使用 sanitizer_extra_options()，以此方式注入的所有选项都可以覆盖当前的参数列表中的值。
+
+**当前值（默认值）：** `["detect_stack_use_after_return=1", "quarantine_size_mb=64"]`
+
+参见 //build/config/sanitizers/sanitizer_default_options.gni:16
+
+<!--
 ### auto_update_packages
 Controls the behavior of sysmgr's PackageUpdatingLoader (v1) and the
 universe-resolver (v2). If true, when resolving a component an attempt to
@@ -98,7 +199,16 @@ example, because the package is in base).
 **Current value (from the default):** `true`
 
 From //build/security.gni:118
+-->
 
+### auto_update_packages
+控制 sysmgr 的 PackageUpdatingLoader (v1)和 niverse-resolver (v2)的行为。如果为 true，则在解析组件时，首先会通过 Software Delivery 系统（特别是通过包解析器 fuchsia.pkg.PackageResolver）尝试更新组件的包。 如果为 false，则不会尝试更新并且仅从本地可用的包中加载组件（例如，当包在 base 之中时）。
+
+**当前值（默认值）：** `true`
+
+参见  //build/security.gni:118
+
+<!--
 ### avb_algorithm
 AVB algorithm type.Supported options:
   SHA256_RSA2048
@@ -111,21 +221,33 @@ AVB algorithm type.Supported options:
 **Current value (from the default):** `"SHA512_RSA4096"`
 
 From //build/images/vbmeta.gni:35
+-->
 
+### 
+
+<!--
 ### avb_atx_metadata
 AVB metadata which will be used to validate public key
 
 **Current value (from the default):** `""`
 
 From //build/images/vbmeta.gni:26
+-->
 
+### 
+
+<!--
 ### avb_key
 a key which will be used to sign VBMETA and images for AVB
 
 **Current value (from the default):** `""`
 
 From //build/images/vbmeta.gni:23
+-->
 
+### 
+
+<!--
 ### base_driver_package_labels
 If you add fuchsia_driver_package labels to this variable, any drivers in these packages will
 be visible to Driver Manager. These package labels are also considered to be in the
@@ -146,7 +268,11 @@ From //products/bringup.gni:51
 **Overridden from the default:** `[]`
 
 From //BUILD.gn:24
+-->
 
+### 
+
+<!--
 ### base_package_labels
 If you add package labels to this variable, the packages will be included in
 the 'base' package set, which represents the set of packages that are part
@@ -169,21 +295,33 @@ From //out/not-default/args.gn:3
 **Overridden from the default:** `[]`
 
 From //BUILD.gn:31
+-->
 
+### 
+
+<!--
 ### basic_env_names
 The list of environment names to include in "basic_envs".
 
 **Current value (from the default):** `["emu"]`
 
 From //build/testing/environments.gni:14
+-->
 
+### 
+
+<!--
 ### blob_layout_format
 The format blobfs should store blobs in.
 
 **Current value (from the default):** `"compact"`
 
 From //build/images/args.gni:106
+-->
 
+### 
+
+<!--
 ### blobfs_board_maximum_bytes
 In addition to reserving space for inodes and data, fs needs additional
 space for maintaining some internal data structures. So the
@@ -197,7 +335,11 @@ reserve few blocks required for its operations.
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:84
+-->
 
+### 
+
+<!--
 ### blobfs_board_minimum_data_bytes
 Number of bytes to reserve for data in the fs. This is in addition
 to what is reserved, if any, for the inodes. Data bytes constitutes
@@ -208,7 +350,11 @@ required for the filesystem.
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:71
+-->
 
+### 
+
+<!--
 ### blobfs_board_minimum_inodes
 minimum_inodes is the number of inodes to reserve for the fs
 An empty string does not reserve any additional space than minimum
@@ -217,7 +363,11 @@ required for the filesystem.
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:61
+-->
 
+### 
+
+<!--
 ### blobfs_enable_streaming_writes
 Set this to true when configuring gn args to enable blobfs streaming writes.
 This is a compile time argument which allows us to conditionally enable blobfs streaming writes
@@ -226,7 +376,11 @@ only on specific configurations.
 **Current value (from the default):** `false`
 
 From //src/storage/blobfs/BUILD.gn:18
+-->
 
+### 
+
+<!--
 ### blobfs_maximum_runtime_bytes
 blobfs_maximum_runtime_bytes is an upper bound on the partition size on the device. Partitions
 can grow as needed if there are extra slices available in FVM. This limit prevents the blobfs
@@ -237,7 +391,11 @@ Pass the empty string for no limit.
 **Current value (from the default):** `""`
 
 From //src/storage/fshost/BUILD.gn:16
+-->
 
+### 
+
+<!--
 ### blobfs_page_in_metrics_recording
 Set this to true when configuring gn args to enable blobfs page-in
 metrics recording.
@@ -247,25 +405,41 @@ to accommodate the large number of metrics entries.
 **Current value (from the default):** `false`
 
 From //src/storage/blobfs/BUILD.gn:13
+-->
 
+### 
+
+<!--
 ### blobfs_product_maximum_bytes
 
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:85
+-->
 
+### 
+
+<!--
 ### blobfs_product_minimum_data_bytes
 
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:72
+-->
 
+### 
+
+<!--
 ### blobfs_product_minimum_inodes
 
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:62
+-->
 
+### 
+
+<!--
 ### board_bootfs_labels
 A list of binary labels to include in the ZBI.
 
@@ -284,7 +458,11 @@ From //boards/x64.gni:19
 **Overridden from the default:** `[]`
 
 From //build/board.gni:22
+-->
 
+### 
+
+<!--
 ### board_driver_package_labels
 A list of driver package labels to include in the 'base' package set. Used
 by the board definition rather than the product definition.
@@ -292,7 +470,11 @@ by the board definition rather than the product definition.
 **Current value (from the default):** `[]`
 
 From //build/board.gni:11
+-->
 
+### 
+
+<!--
 ### board_extra_vbmeta_images
 Board level extra vbmeta images to be combined into the top-level vbmeta
 struct.
@@ -300,14 +482,22 @@ struct.
 **Current value (from the default):** `[]`
 
 From //build/images/vbmeta.gni:42
+-->
 
+### 
+
+<!--
 ### board_has_libvulkan_arm_mali
 Board files can set this to true if they have a package with a mali libvulkan VCD.
 
 **Current value (from the default):** `false`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:55
+-->
 
+### 
+
+<!--
 ### board_name
 Board name used for paving and amber updates.
 
@@ -326,7 +516,11 @@ From //boards/x64.gni:8
 **Overridden from the default:** `""`
 
 From //build/board.gni:7
+-->
 
+### 
+
+<!--
 ### board_package_labels
 A list of package labels to include in the 'base' package set. Used by the
 board definition rather than the product definition.
@@ -346,7 +540,11 @@ From //boards/common/x64-common.gni:67
 **Overridden from the default:** `[]`
 
 From //build/board.gni:15
+-->
 
+### 
+
+<!--
 ### board_recovery_bootfs_labels
 A list of binary labels to include in the recovery ZBI.
 
@@ -365,7 +563,11 @@ From //boards/x64.gni:13
 **Overridden from the default:** `[]`
 
 From //build/board.gni:33
+-->
 
+### 
+
+<!--
 ### board_recovery_package_labels
 A list of package labels to include in the recovery package set. Used by the
 board definition rather than the product definition.
@@ -373,7 +575,11 @@ board definition rather than the product definition.
 **Current value (from the default):** `[]`
 
 From //build/board.gni:19
+-->
 
+### 
+
+<!--
 ### board_system_image_deps
 A list of binary labels to include in the system_image package.
 
@@ -392,7 +598,11 @@ From //boards/common/x64-common.gni:62
 **Overridden from the default:** `[]`
 
 From //build/board.gni:36
+-->
 
+### 
+
+<!--
 ### board_tools
 List of paths to board-specific tools to include in the build output.
 
@@ -407,7 +617,11 @@ any kind of stable contract for users of the archive.
 **Current value (from the default):** `[]`
 
 From //build/images/args.gni:136
+-->
 
+### 
+
+<!--
 ### board_zedboot_bootfs_labels
 A list of binary labels to include in the zedboot ZBI.
 
@@ -426,7 +640,11 @@ From //boards/x64.gni:14
 **Overridden from the default:** `[]`
 
 From //build/board.gni:30
+-->
 
+### 
+
+<!--
 ### board_zedboot_cmdline_args
 List of kernel command line arguments to bake into the zedboot image that are
 required by this board. See also zedboot_cmdline_args in
@@ -435,7 +653,11 @@ required by this board. See also zedboot_cmdline_args in
 **Current value (from the default):** `[]`
 
 From //build/board.gni:27
+-->
 
+### 
+
+<!--
 ### bootfs_only
 Put the "system image" package in the BOOTFS.  Hence what would
 otherwise be /system/... at runtime is /boot/... instead.
@@ -455,13 +677,21 @@ From //products/bringup.gni:5
 **Overridden from the default:** `false`
 
 From //build/images/args.gni:14
+-->
 
+### 
+
+<!--
 ### build_all_vp9_file_decoder_conformance_tests
 
 **Current value (from the default):** `false`
 
 From //src/media/codec/examples/BUILD.gn:10
+-->
 
+### 
+
+<!--
 ### build_id_format
 Build ID algorithm to use for Fuchsia-target code.  This does not apply
 to host or guest code.  The value is the argument to the linker's
@@ -471,7 +701,11 @@ default format is used.
 **Current value (from the default):** `""`
 
 From //build/config/build_id.gni:10
+-->
 
+### 
+
+<!--
 ### build_info_board
 Board configuration of the current build
 
@@ -490,7 +724,11 @@ From //out/not-default/args.gn:4
 **Overridden from the default:** `"x64"`
 
 From //build/info/info.gni:12
+-->
 
+### 
+
+<!--
 ### build_info_product
 Product configuration of the current build
 
@@ -509,7 +747,11 @@ From //out/not-default/args.gn:5
 **Overridden from the default:** `""`
 
 From //build/info/info.gni:9
+-->
 
+### 
+
+<!--
 ### build_info_version
 Logical version of the current build. If not set, defaults to the timestamp
 of the most recent update.
@@ -517,48 +759,76 @@ of the most recent update.
 **Current value (from the default):** `""`
 
 From //build/info/info.gni:16
+-->
 
+### 
+
+<!--
 ### build_libvulkan_arm_mali
 Targets that will be built as mali vulkan ICDS.
 
 **Current value (from the default):** `[]`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:43
+-->
 
+### 
+
+<!--
 ### build_libvulkan_goldfish
 
 **Current value (from the default):** `""`
 
 From //src/graphics/lib/goldfish-vulkan/gnbuild/BUILD.gn:13
+-->
 
+### 
+
+<!--
 ### build_libvulkan_img_rgx
 Targets that will be built as IMG vulkan ICDS.
 
 **Current value (from the default):** `[]`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:52
+-->
 
+### 
+
+<!--
 ### build_libvulkan_qcom_adreno
 Targets that will be built as qualcomm vulkan ICDS.
 
 **Current value (from the default):** `[]`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:49
+-->
 
+### 
+
+<!--
 ### build_libvulkan_vsi_vip
 Targets that will be built as verisilicon vulkan ICDS.
 
 **Current value (from the default):** `[]`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:46
+-->
 
+### 
+
+<!--
 ### build_sdk_archives
 Whether to build SDK tarballs.
 
 **Current value (from the default):** `false`
 
 From //build/sdk/config.gni:7
+-->
 
+### 
+
+<!--
 ### build_should_trace_actions
 If enabled, all filesystem activity by actions will be traced and checked
 against their declared inputs and outputs and depfiles (if present).
@@ -567,14 +837,22 @@ An action that accesses undeclared inputs or outputs will fail the build.
 **Current value (from the default):** `false`
 
 From //build/config/BUILDCONFIG.gn:566
+-->
 
+### 
+
+<!--
 ### build_uefi_disk
 Generate a UEFI disk image
 
 **Current value (from the default):** `false`
 
 From //build/images/args.gni:21
+-->
 
+### 
+
+<!--
 ### cache_package_labels
 If you add package labels to this variable, the packages will be included
 in the 'cache' package set, which represents an additional set of software
@@ -598,32 +876,52 @@ From //products/bringup.gni:55
 **Overridden from the default:** `[]`
 
 From //BUILD.gn:39
+-->
 
+### 
+
+<!--
 ### camera_debug
 
 **Current value (from the default):** `false`
 
 From //src/camera/debug.gni:6
+-->
 
+### 
+
+<!--
 ### camera_gym_configuration_cycle_time_ms
 
 **Current value (from the default):** `10000`
 
 From //src/camera/bin/camera-gym/BUILD.gn:11
+-->
 
+### 
+
+<!--
 ### camera_gym_enable_root_presenter
 
 **Current value (from the default):** `false`
 
 From //src/camera/bin/camera-gym/BUILD.gn:12
+-->
 
+### 
+
+<!--
 ### carnelian_enable_vulkan_validation
 Include the vulkan validation layers in carnelian examples.
 
 **Current value (from the default):** `false`
 
 From //src/lib/ui/carnelian/BUILD.gn:14
+-->
 
+### 
+
+<!--
 ### check_production_eligibility
 Whether to perform check on the build's eligibility for production.
 If true, base_packages and cache_packages are checked against dependencies
@@ -633,7 +931,11 @@ non-production GN labels. Build will fail if such dependency is found.
 **Current value (from the default):** `false`
 
 From //build/images/args.gni:100
+-->
 
+### 
+
+<!--
 ### check_repeatability
 If enabled, run each affected action twice (once with renamed outputs)
 and compare the outputs' contents for reproducibility.
@@ -641,7 +943,11 @@ and compare the outputs' contents for reproducibility.
 **Current value (from the default):** `false`
 
 From //build/config/BUILDCONFIG.gn:570
+-->
 
+### 
+
+<!--
 ### check_vtables_in_rodata
 Check that all vtables in fuchsia binaries listed in binaries.json are in
 readonly data sections. This check will be run at the end of a full build.
@@ -651,7 +957,11 @@ This is primarily meant to be used by the clang canary builders.
 **Current value (from the default):** `false`
 
 From //build/images/args.gni:61
+-->
 
+### 
+
+<!--
 ### chromium_build_dir
 This variable specifies a fully qualified Chromium build output directory,
 such as `/home/USER/chrome/src/out/fuchsia`, that 'cast_runner', 'web_runner',
@@ -661,7 +971,11 @@ packages from CIPD will be used.
 **Current value (from the default):** `""`
 
 From //src/chromium/build_args.gni:10
+-->
 
+### 
+
+<!--
 ### clang_embed_bitcode
 Embed LLVM bitcode as .llvmbc section in ELF files. This is intended
 primarily for external tools that use bitcode for analysis.
@@ -669,14 +983,22 @@ primarily for external tools that use bitcode for analysis.
 **Current value (from the default):** `false`
 
 From //build/config/clang/clang.gni:16
+-->
 
+### 
+
+<!--
 ### clang_lib_dir
 Path to Clang lib directory.
 
 **Current value (from the default):** `"../../prebuilt/third_party/clang/linux-x64/lib"`
 
 From //build/images/manifest.gni:13
+-->
 
+### 
+
+<!--
 ### clang_ml_inliner
 Controls whether to use the ML inliner in Clang to reduce size. Note that
 the option only takes effect when `optimize` is set to `"size"`.
@@ -684,7 +1006,11 @@ the option only takes effect when `optimize` is set to `"size"`.
 **Current value (from the default):** `false`
 
 From //build/config/compiler.gni:43
+-->
 
+### 
+
+<!--
 ### clang_prefix
 The default clang toolchain provided by the prebuilt. This variable is
 additionally consumed by the Go toolchain.
@@ -692,7 +1018,11 @@ additionally consumed by the Go toolchain.
 **Current value (from the default):** `"../../prebuilt/third_party/clang/linux-x64/bin"`
 
 From //build/config/clang/clang.gni:12
+-->
 
+### 
+
+<!--
 ### clang_tool_dir
 Directory where the Clang toolchain binaries ("clang", "llvm-nm", etc.) are
 found.  If this is "", then the behavior depends on $clang_prefix.
@@ -701,7 +1031,11 @@ This toolchain is expected to support both Fuchsia targets and the host.
 **Current value (from the default):** `""`
 
 From //build/toolchain/zircon/clang.gni:11
+-->
 
+### 
+
+<!--
 ### cobalt_environment
 Selects the Cobalt environment to send data to. Choices:
   "LOCAL" - record log data locally to a file
@@ -711,14 +1045,22 @@ Selects the Cobalt environment to send data to. Choices:
 **Current value (from the default):** `"PROD"`
 
 From //src/cobalt/bin/app/BUILD.gn:14
+-->
 
+### 
+
+<!--
 ### compress_blobs
 Whether to compress the blobfs image.
 
 **Current value (from the default):** `true`
 
 From //build/images/args.gni:103
+-->
 
+### 
+
+<!--
 ### concurrent_dart_jobs
 Maximum number of Dart processes to run in parallel.
 
@@ -729,21 +1071,33 @@ errors we explicitly reduce the number of jobs.
 **Current value (from the default):** `32`
 
 From //build/dart/BUILD.gn:17
+-->
 
+### 
+
+<!--
 ### config_have_heap
 Tells openweave to include files that require heap access.
 
 **Current value (from the default):** `true`
 
 From [//third_party/openweave-core/config.gni:32](https://fuchsia.googlesource.com/third_party/openweave-core/+/3203ab69f65bbc9a49e75c64c08b929e07cd02f4/config.gni#32)
+-->
 
+### 
+
+<!--
 ### conformance_testing_netstack
 If true, uses a netstack tailored for network conformance testing.
 
 **Current value (from the default):** `false`
 
 From //src/connectivity/network/BUILD.gn:13
+-->
 
+### 
+
+<!--
 ### core_realm_package_name
 The following arguments are all used to configure the contents of the core
 component realm. See //src/sys/core/build/core.gni for documentation on what
@@ -753,46 +1107,78 @@ TODO: redo comments
 **Current value (from the default):** `"core-generic"`
 
 From //build/product.gni:21
+-->
 
+### 
+
+<!--
 ### core_realm_shards
 
 **Current value (from the default):** `[]`
 
 From //build/product.gni:22
+-->
 
+### 
+
+<!--
 ### crash_diagnostics_dir
 Clang crash reports directory path. Use empty path to disable altogether.
 
 **Current value (from the default):** `"//out/not-default/clang-crashreports"`
 
 From //build/config/clang/crash_diagnostics.gni:7
+-->
 
+### 
+
+<!--
 ### crashpad_dependencies
 
 **Current value (from the default):** `"fuchsia"`
 
 From [//third_party/crashpad/build/crashpad_buildconfig.gni:22](https://chromium.googlesource.com/crashpad/crashpad/+/0c3d6e5fa10fcac9ca63df7d3fb68ef7f7bd5f3c/build/crashpad_buildconfig.gni#22)
+-->
 
+### 
+
+<!--
 ### crashpad_http_transport_impl
 
 **Current value (from the default):** `"libcurl"`
 
 From [//third_party/crashpad/util/net/tls.gni:21](https://chromium.googlesource.com/crashpad/crashpad/+/0c3d6e5fa10fcac9ca63df7d3fb68ef7f7bd5f3c/util/net/tls.gni#21)
+-->
 
+### 
+
+<!--
 ### crashpad_use_boringssl_for_http_transport_socket
 
 **Current value (from the default):** `true`
 
 From [//third_party/crashpad/util/net/tls.gni:30](https://chromium.googlesource.com/crashpad/crashpad/+/0c3d6e5fa10fcac9ca63df7d3fb68ef7f7bd5f3c/util/net/tls.gni#30)
+-->
 
+### 
+
+<!--
 ### current_cpu
 
 **Current value (from the default):** `""`
+-->
 
+### 
+
+<!--
 ### current_os
 
 **Current value (from the default):** `""`
+-->
 
+### 
+
+<!--
 ### custom_signing_script
 If non-empty, the given script will be invoked to produce a signed ZBI
 image. The given script must accept -z for the input zbi path, and -o for
@@ -802,14 +1188,22 @@ starts with //).
 **Current value (from the default):** `""`
 
 From //build/images/custom_signing.gni:10
+-->
 
+### 
+
+<!--
 ### custom_signing_script_deps
 If `custom_signing_script` is not empty, a list of dependencies for the script.
 
 **Current value (from the default):** `[]`
 
 From //build/images/custom_signing.gni:13
+-->
 
+### 
+
+<!--
 ### custom_signing_script_tools
 If `custom signing script` is not empty, a list of host tool labels, without
 a toolchain, that the script depends on. The reason why these are not in
@@ -821,7 +1215,11 @@ is actually parsed.
 **Current value (from the default):** `[]`
 
 From //build/images/custom_signing.gni:21
+-->
 
+### 
+
+<!--
 ### dart_default_build_cfg
 TODO(fxbug.dev/64153) renable aot builds
  if (dart_force_product) {
@@ -843,7 +1241,11 @@ Non-product JIT
 ```
 
 From //build/dart/config.gni:18
+-->
 
+### 
+
+<!--
 ### dart_force_product
 Forces all Dart apps to build in product mode which is a
 stripped down version of the VM running in AOT mode.
@@ -851,7 +1253,11 @@ stripped down version of the VM running in AOT mode.
 **Current value (from the default):** `false`
 
 From //build/dart/config.gni:10
+-->
 
+### 
+
+<!--
 ### data_partition_manifest
 Path to manifest file containing data to place into the initial /data
 partition.
@@ -859,20 +1265,32 @@ partition.
 **Current value (from the default):** `""`
 
 From //build/images/args.gni:50
+-->
 
+### 
+
+<!--
 ### debian_guest_earlycon
 
 **Current value (from the default):** `false`
 
 From //src/virtualization/packages/debian_guest/BUILD.gn:10
+-->
 
+### 
+
+<!--
 ### debian_guest_qcow
 Package the rootfs as a QCOW image (as opposed to a flat file).
 
 **Current value (from the default):** `true`
 
 From //src/virtualization/packages/debian_guest/BUILD.gn:9
+-->
 
+### 
+
+<!--
 ### debuginfo
 * `none` means no debugging information
 * `backtrace` means sufficient debugging information to symbolize backtraces
@@ -881,14 +1299,22 @@ From //src/virtualization/packages/debian_guest/BUILD.gn:9
 **Current value (from the default):** `"debug"`
 
 From //build/config/compiler.gni:55
+-->
 
+### 
+
+<!--
 ### dev_bootfs_labels
 List of labels for objects to include in the ZBI.
 
 **Current value (from the default):** `[]`
 
 From //build/dev.gni:17
+-->
 
+### 
+
+<!--
 ### dev_build_only_deps
 List of labels for targets that should be built but not included in any
 build outputs that are part of the build API (e.g. zbi's, package servers).
@@ -896,28 +1322,44 @@ build outputs that are part of the build API (e.g. zbi's, package servers).
 **Current value (from the default):** `[]`
 
 From //build/dev.gni:14
+-->
 
+### 
+
+<!--
 ### dev_recovery_bootfs_labels
 List of binary labels to include in the recovery ZBI.
 
 **Current value (from the default):** `[]`
 
 From //build/dev.gni:23
+-->
 
+### 
+
+<!--
 ### dev_system_image_deps
 List of labels for binaries to include in the system image.
 
 **Current value (from the default):** `[]`
 
 From //build/dev.gni:10
+-->
 
+### 
+
+<!--
 ### dev_zedboot_bootfs_labels
 List of binary labels to include in the zedboot ZBI.
 
 **Current value (from the default):** `[]`
 
 From //build/dev.gni:20
+-->
 
+### 
+
+<!--
 ### devmgr_config
 List of arguments to add to /boot/config/devmgr.
 These come after synthesized arguments to configure blobfs and pkgfs.
@@ -925,14 +1367,22 @@ These come after synthesized arguments to configure blobfs and pkgfs.
 **Current value (from the default):** `[]`
 
 From //build/images/args.gni:18
+-->
 
+### 
+
+<!--
 ### disable_dart_strict_deps
 Enable all strict deps.
 
 **Current value (from the default):** `false`
 
 From //build/dart/dart_library.gni:19
+-->
 
+### 
+
+<!--
 ### disable_kernel_pci
 Disable kernel PCI driver support. A counterpart of the the build
 flag platform_enable_user_pci in //src/devices/bus/drivers/pci/pci.gni.
@@ -940,14 +1390,22 @@ flag platform_enable_user_pci in //src/devices/bus/drivers/pci/pci.gni.
 **Current value (from the default):** `false`
 
 From //zircon/kernel/params.gni:67
+-->
 
+### 
+
+<!--
 ### dwarf_version
 Explicitly specify DWARF version used.
 
 **Current value (from the default):** `5`
 
 From //build/config/compiler.gni:69
+-->
 
+### 
+
+<!--
 ### enable_api_diff
 Detect dart API changes
 TODO(fxbug.dev/36723, fxbug.dev/6623) Remove this flag once issues are resolved
@@ -955,14 +1413,22 @@ TODO(fxbug.dev/36723, fxbug.dev/6623) Remove this flag once issues are resolved
 **Current value (from the default):** `false`
 
 From //build/dart/dart_library.gni:23
+-->
 
+### 
+
+<!--
 ### enable_dart_analysis
 Enable all dart analysis
 
 **Current value (from the default):** `true`
 
 From //build/dart/dart_library.gni:16
+-->
 
+### 
+
+<!--
 ### enable_frame_pointers
 Controls whether the compiler emits full stack frames for function calls.
 This reduces performance but increases the ability to generate good
@@ -975,14 +1441,22 @@ remove this option when the issues are addressed.
 **Current value (from the default):** `false`
 
 From //build/config/BUILD.gn:24
+-->
 
+### 
+
+<!--
 ### enable_lock_dep
 Enable kernel lock dependency tracking.
 
 **Current value (from the default):** `false`
 
 From //zircon/kernel/params.gni:35
+-->
 
+### 
+
+<!--
 ### enable_lock_dep_tests
 Enable kernel lock dependency tracking tests.  By default this is
 enabled when tracking is enabled, but can also be eanbled independently
@@ -992,7 +1466,11 @@ disabled.
 **Current value (from the default):** `false`
 
 From //zircon/kernel/params.gni:94
+-->
 
+### 
+
+<!--
 ### enable_mdns_trace
 Enables the tracing feature of mdns, which can be turned on using
 "mdns-util verbose".
@@ -1000,7 +1478,11 @@ Enables the tracing feature of mdns, which can be turned on using
 **Current value (from the default):** `false`
 
 From //src/connectivity/network/mdns/service/BUILD.gn:13
+-->
 
+### 
+
+<!--
 ### enable_netboot
 Whether to build the netboot zbi by default.
 
@@ -1009,7 +1491,11 @@ You can still build //build/images:netboot explicitly even if enable_netboot is 
 **Current value (from the default):** `false`
 
 From //build/images/args.gni:55
+-->
 
+### 
+
+<!--
 ### escher_test_for_glsl_spirv_mismatch
 If true, this enables the |SpirvNotChangedTest| to check if the precompiled
 shaders on disk are up to date and reflect the current shader source code
@@ -1021,7 +1507,11 @@ written to disk. Other teams and CQ do not need to worry about this flag.
 **Current value (from the default):** `false`
 
 From //src/ui/lib/escher/build_args.gni:18
+-->
 
+### 
+
+<!--
 ### escher_use_runtime_glsl
 Determines whether or not escher will build with the glslang and shaderc
 libraries. When false, these libraries will not be included in the scenic/
@@ -1031,20 +1521,32 @@ runtime. Precompiled spirv code will be loaded into memory from disk instead.
 **Current value (from the default):** `false`
 
 From //src/ui/lib/escher/build_args.gni:10
+-->
 
+### 
+
+<!--
 ### exclude_testonly_syscalls
 If true, excludes syscalls with the [testonly] attribute.
 
 **Current value (from the default):** `false`
 
 From //zircon/vdso/vdso.gni:7
+-->
 
+### 
+
+<!--
 ### expat_build_root
 
 **Current value (from the default):** `"//third_party/expat"`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:14
+-->
 
+### 
+
+<!--
 ### experimental_cxx_version
 **NOTE:** This is for **experimentation only** and should not normally be
 changed.  Set the version of the C++ standard to compile for, 17 or 20.
@@ -1052,7 +1554,11 @@ changed.  Set the version of the C++ standard to compile for, 17 or 20.
 **Current value (from the default):** `17`
 
 From //build/config/BUILD.gn:29
+-->
 
+### 
+
+<!--
 ### experimental_wlan_client_mlme
 Selects the SoftMAC client implementation to use. Choices:
   false (default) - C++ Client MLME implementation
@@ -1062,20 +1568,32 @@ This argument is temporary until Rust MLME is ready to be used.
 **Current value (from the default):** `false`
 
 From //src/connectivity/wlan/lib/mlme/cpp/BUILD.gn:12
+-->
 
+### 
+
+<!--
 ### extra_manifest_args
 Extra args to globally apply to the manifest generation script.
 
 **Current value (from the default):** `[]`
 
 From //build/images/manifest.gni:19
+-->
 
+### 
+
+<!--
 ### extra_package_labels
 
 **Current value (from the default):** `[]`
 
 From //third_party/cobalt/BUILD.gn:10
+-->
 
+### 
+
+<!--
 ### extra_variants
 Additional variant toolchain configs to support.
 This is just added to [`known_variants`](#known_variants).
@@ -1083,7 +1601,11 @@ This is just added to [`known_variants`](#known_variants).
 **Current value (from the default):** `[]`
 
 From //build/config/BUILDCONFIG.gn:1351
+-->
 
+### 
+
+<!--
 ### extract_minfs_metadata_on_corruption
 If extract_minfs_metadata_on_corruption is true, fshost extracts minfs metadata on finding it
 corrupted. Setting this flag to true helps debugging corruptions.
@@ -1091,13 +1613,21 @@ corrupted. Setting this flag to true helps debugging corruptions.
 **Current value (from the default):** `false`
 
 From //src/storage/fshost/BUILD.gn:32
+-->
 
+### 
+
+<!--
 ### fastboot_product
 
 **Current value (from the default):** `""`
 
 From //build/images/args.gni:83
+-->
 
+### 
+
+<!--
 ### fidl_trace_level
 0 = Disable FIDL userspace tracing (default).
 1 = Enable FIDL userspace tracing.
@@ -1105,7 +1635,11 @@ From //build/images/args.gni:83
 **Current value (from the default):** `0`
 
 From //build/fidl/args.gni:8
+-->
 
+### 
+
+<!--
 ### firmware_prebuilts
 List of prebuilt firmware blobs to include in update packages.
 
@@ -1117,7 +1651,11 @@ Each entry in the list is a scope containing:
 **Current value (from the default):** `[]`
 
 From //build/images/args.gni:35
+-->
 
+### 
+
+<!--
 ### firmware_prebuilts_path_suffix
 Suffix to append to all `firmware_prebuilts` `path` variables.
 
@@ -1127,7 +1665,11 @@ that users can easily switch revisions using a single arg.
 **Current value (from the default):** `""`
 
 From //build/images/args.gni:41
+-->
 
+### 
+
+<!--
 ### flutter_default_build_cfg
 Non-product AOT
 
@@ -1144,7 +1686,11 @@ Non-product AOT
 ```
 
 From //build/flutter/config.gni:22
+-->
 
+### 
+
+<!--
 ### flutter_driver_enabled
 Enables/Disables flutter driver using '--args=flutter_driver_enabled=[true/false]'
 in fx set. (Disabled by default)
@@ -1153,7 +1699,11 @@ This is effective only on debug builds.
 **Current value (from the default):** `false`
 
 From //build/testing/flutter_driver.gni:9
+-->
 
+### 
+
+<!--
 ### flutter_force_product
 If set to true, will force the runenrs to be built in
 product mode which means they will not have an exposed vm service
@@ -1161,20 +1711,32 @@ product mode which means they will not have an exposed vm service
 **Current value (from the default):** `false`
 
 From //build/flutter/config.gni:10
+-->
 
+### 
+
+<!--
 ### font_catalog_paths
 
 **Current value (from the default):** `["//prebuilt/third_party/fonts/fuchsia.font_catalog.json"]`
 
 From //src/fonts/build/font_args.gni:17
+-->
 
+### 
+
+<!--
 ### font_pkg_entries
 Merged contents of .font_pkgs.json files. Populated in fonts.gni.
 
 **Current value (from the default):** `[]`
 
 From //src/fonts/build/font_args.gni:32
+-->
 
+### 
+
+<!--
 ### font_pkgs_paths
 Locations of .font_pkgs.json files, which list the locations of font files
 within the workspace, as well as safe names that are derived from the fonts'
@@ -1183,14 +1745,22 @@ file names and can be used to name Fuchsia packages.
 **Current value (from the default):** `["//prebuilt/third_party/fonts/fuchsia.font_pkgs.json"]`
 
 From //src/fonts/build/font_args.gni:22
+-->
 
+### 
+
+<!--
 ### fonts_dir
 Directory into which all fonts are checked out from CIPD
 
 **Current value (from the default):** `"//prebuilt/third_party/fonts"`
 
 From //src/fonts/build/font_args.gni:12
+-->
 
+### 
+
+<!--
 ### format_minfs_on_corruption
 If format_minfs_on_corruption is true (the default), fshost formats minfs partition on finding
 it corrupted.  Set to false to keep the devices in a corrupted state which might be of help to
@@ -1199,7 +1769,11 @@ debug issues.
 **Current value (from the default):** `true`
 
 From //src/storage/fshost/BUILD.gn:28
+-->
 
+### 
+
+<!--
 ### fuchsia_sdk_root
 Consumers of the Fuchsia SDK instantiate templates for various SDK parts at
 a specific spot within their buildroots. The target name for the specific
@@ -1212,7 +1786,11 @@ non-SDK buildroots.
 **Current value (from the default):** `""`
 
 From //build/fuchsia/sdk.gni:17
+-->
 
+### 
+
+<!--
 ### fuchsia_static_pkgs_goldens
 An optional lit of golden files for fuchsia.zbi static pkgs list. If
 specified, they would be compared against fuchsia.zbi static pkgs list
@@ -1231,7 +1809,11 @@ above changes.
 **Current value (from the default):** `[]`
 
 From //build/security.gni:81
+-->
 
+### 
+
+<!--
 ### fuchsia_zbi_bootfs_filelist_goldens
 An optional lit of golden files for fuchsia.zbi bootFS file list. If
 specified, they would be compared against fuchsia.zbi bootFS file list
@@ -1250,7 +1832,11 @@ above changes.
 **Current value (from the default):** `[]`
 
 From //build/security.gni:51
+-->
 
+### 
+
+<!--
 ### fuchsia_zbi_kernel_cmdline_goldens
 An optional list of golden files for fuchsia.zbi kernel cmdline args. If
 specified, they would be compared against fuchsia.zbi kernel cmdline during
@@ -1269,14 +1855,22 @@ above changes.
 **Current value (from the default):** `[]`
 
 From //build/security.gni:21
+-->
 
+### 
+
+<!--
 ### futex_tracing_enabled
 Enables kernel tracing of futex interactions
 
 **Current value (from the default):** `false`
 
 From //zircon/kernel/params.gni:51
+-->
 
+### 
+
+<!--
 ### fvm_emmc_partition_size
 The size in bytes of the FVM partition on the target eMMC devices.
 Specifying this parameter will lead build to generate a fvm.fastboot.blk
@@ -1285,19 +1879,31 @@ suitable for flashing through fastboot for eMMC devices.
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:17
+-->
 
+### 
+
+<!--
 ### fvm_ftl_nand_block_count
 
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:99
+-->
 
+### 
+
+<!--
 ### fvm_ftl_nand_oob_size
 
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:97
+-->
 
+### 
+
+<!--
 ### fvm_ftl_nand_page_size
 Specifying these variables will generate a NAND FVM image suitable for
 directly flashing via fastboot. The NAND characteristics are required
@@ -1308,13 +1914,21 @@ room to initialize on boot.
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:96
+-->
 
+### 
+
+<!--
 ### fvm_ftl_nand_pages_per_block
 
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:98
+-->
 
+### 
+
+<!--
 ### fvm_image_size
 The size in bytes of the FVM partition image to create. Normally this is
 computed to be just large enough to fit the blob and data images. The
@@ -1324,7 +1938,11 @@ that is too small will result in build failure.
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:12
+-->
 
+### 
+
+<!--
 ### fvm_max_disk_size
 The max size of the disk where the FVM is written. This is used for
 preallocating metadata to determine how much the FVM can expand on disk.
@@ -1341,13 +1959,21 @@ at pave/format time.
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:30
+-->
 
+### 
+
+<!--
 ### fvm_partition
 
 **Current value (from the default):** `""`
 
 From //build/images/args.gni:81
+-->
 
+### 
+
+<!--
 ### fvm_reserved_slices
 Number of slices reserved by FVM for internal usage. A reservation
 partition will be added to the FVM image, containing this many slices.
@@ -1358,7 +1984,11 @@ configurations.
 **Current value (from the default):** `"1"`
 
 From //build/images/fvm.gni:44
+-->
 
+### 
+
+<!--
 ### fvm_slice_size
 The size of the FVM partition images "slice size". The FVM slice size is a
 minimum size of a particular chunk of a partition that is stored within
@@ -1369,7 +1999,11 @@ selected for conservation of space, rather than performance.
 **Current value (from the default):** `"8388608"`
 
 From //build/images/fvm.gni:37
+-->
 
+### 
+
+<!--
 ### gcc_tool_dir
 Directory where the GCC toolchain binaries ("gcc", "nm", etc.) are found.
 This directory is expected to contain `aarch64-elf-*` and `x86_64-elf-*`
@@ -1379,13 +2013,21 @@ used for host tools.  If this is "", then a standard prebuilt is used.
 **Current value (from the default):** `""`
 
 From //build/toolchain/zircon/gcc.gni:15
+-->
 
+### 
+
+<!--
 ### glm_build_root
 
 **Current value (from the default):** `"//third_party/glm"`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:17
+-->
 
+### 
+
+<!--
 ### go_vet_enabled
   go_vet_enabled
     [bool] if false, go vet invocations are disabled for all builds.
@@ -1393,7 +2035,11 @@ From //src/graphics/lib/magma/gnbuild/magma.gni:17
 **Current value (from the default):** `false`
 
 From //build/go/go_build.gni:22
+-->
 
+### 
+
+<!--
 ### gocache_dir
   gocache_dir
     Directory GOCACHE environment variable will be set to. This directory
@@ -1403,7 +2049,11 @@ From //build/go/go_build.gni:22
 **Current value (from the default):** `"/b/s/w/ir/x/w/out/not-default/dartlang/.gocache"`
 
 From //build/go/go_build.gni:18
+-->
 
+### 
+
+<!--
 ### goma_dir
 Directory containing the Goma source code.  This can be a GN
 source-absolute path ("//...") or a system absolute path.
@@ -1411,7 +2061,11 @@ source-absolute path ("//...") or a system absolute path.
 **Current value (from the default):** `"//prebuilt/third_party/goma/linux-x64"`
 
 From //build/toolchain/goma.gni:15
+-->
 
+### 
+
+<!--
 ### gpt_image
 GUID Partition Table (GPT) image.
 
@@ -1420,7 +2074,11 @@ Typically useful for initially flashing a device from zero-state.
 **Current value (from the default):** `""`
 
 From //build/images/args.gni:46
+-->
 
+### 
+
+<!--
 ### graphics_compute_generate_debug_shaders
 Set to true in your args.gn file to generate pre-processed and
 auto-formatted shaders under the "debug" sub-directory of HotSort
@@ -1444,7 +2102,11 @@ Example results:
 **Current value (from the default):** `true`
 
 From //src/graphics/lib/compute/gn/glsl_shader_rules.gni:28
+-->
 
+### 
+
+<!--
 ### graphics_compute_skip_spirv_opt
 At times we may want to compare the performance of unoptimized
 vs. optimized shaders.  On desktop platforms, use of spirv-opt
@@ -1458,17 +2120,29 @@ attributing code generation bugs.
 **Current value (from the default):** `true`
 
 From //src/graphics/lib/compute/gn/glsl_shader_rules.gni:38
+-->
 
+### 
+
+<!--
 ### host_byteorder
 
 **Current value (from the default):** `"undefined"`
 
 From //build/config/host_byteorder.gni:7
+-->
 
+### 
+
+<!--
 ### host_cpu
 
 **Current value (from the default):** `"x64"`
+-->
 
+### 
+
+<!--
 ### host_labels
 If you add labels to this variable, these will be included in the 'host'
 artifact set, which represents an additional set of host-only software that
@@ -1489,11 +2163,19 @@ From //products/bringup.gni:64
 **Overridden from the default:** `[]`
 
 From //BUILD.gn:58
+-->
 
+### 
+
+<!--
 ### host_os
 
 **Current value (from the default):** `"linux"`
+-->
 
+### 
+
+<!--
 ### host_tools_dir
 This is the directory where host tools intended for manual use by
 developers get installed.  It's something a developer might put
@@ -1506,7 +2188,11 @@ by an explicit install_host_tools() rule (see //build/host.gni).
 **Current value (from the default):** `"//out/not-default/host-tools"`
 
 From //build/host.gni:13
+-->
 
+### 
+
+<!--
 ### icu_disable_thin_archive
 If true, compile icu into a standalone static library. Currently this is
 only useful on Chrome OS.
@@ -1514,7 +2200,11 @@ only useful on Chrome OS.
 **Current value (from the default):** `false`
 
 From [//third_party/icu/config.gni:12](https://chromium.googlesource.com/chromium/deps/icu/+/d879aac9717d15679125cfe8c26b482006f107f3/config.gni#12)
+-->
 
+### 
+
+<!--
 ### icu_major_version_number
 Contains the major version number of the ICU library, for dependencies that
 need different configuration based on the library version. Currently this
@@ -1523,7 +2213,11 @@ is only useful in Fuchsia.
 **Current value (from the default):** `"68"`
 
 From [//third_party/icu/version.gni:9](https://chromium.googlesource.com/chromium/deps/icu/+/d879aac9717d15679125cfe8c26b482006f107f3/version.gni#9)
+-->
 
+### 
+
+<!--
 ### icu_use_data_file
 Tells icu to load an external data file rather than rely on the icudata
 being linked directly into the binary.
@@ -1531,7 +2225,11 @@ being linked directly into the binary.
 **Current value (from the default):** `true`
 
 From [//third_party/icu/config.gni:8](https://chromium.googlesource.com/chromium/deps/icu/+/d879aac9717d15679125cfe8c26b482006f107f3/config.gni#8)
+-->
 
+### 
+
+<!--
 ### include_devmgr_config_in_vbmeta
 If true, /config/devmgr config will be included into a vbmeta image
 instead of bootfs.
@@ -1539,21 +2237,33 @@ instead of bootfs.
 **Current value (from the default):** `false`
 
 From //build/images/vbmeta.gni:20
+-->
 
+### 
+
+<!--
 ### include_fvm_blob_sparse
 Include fvm.blob.sparse.blk image into the build if set to true
 
 **Current value (from the default):** `false`
 
 From //build/images/args.gni:116
+-->
 
+### 
+
+<!--
 ### include_internal_fonts
 Set to true to include internal fonts in the build.
 
 **Current value (from the default):** `false`
 
 From //src/fonts/build/font_args.gni:7
+-->
 
+### 
+
+<!--
 ### include_tests_that_fail_on_nuc_asan
 Whether to include tests that are known to fail on NUC with ASan.
 Should be set to false in the infra builders that have board == "x64" and
@@ -1562,7 +2272,11 @@ Should be set to false in the infra builders that have board == "x64" and
 **Current value (from the default):** `true`
 
 From //build/testing/environments.gni:11
+-->
 
+### 
+
+<!--
 ### include_zxdb_large_tests
 Normally these tests are not built and run because they require large amounts of optional data
 be downloaded. Set this to true to enable the build for the zxdb_large_tests.
@@ -1571,45 +2285,73 @@ See symbols/test_data/README.md for how to download the data required for this t
 **Current value (from the default):** `false`
 
 From //src/developer/debug/zxdb/BUILD.gn:12
+-->
 
+### 
+
+<!--
 ### inet_config_enable_async_dns_sockets
 Tells inet to support additionally support async dns sockets.
 
 **Current value (from the default):** `true`
 
 From [//third_party/openweave-core/config.gni:17](https://fuchsia.googlesource.com/third_party/openweave-core/+/3203ab69f65bbc9a49e75c64c08b929e07cd02f4/config.gni#17)
+-->
 
+### 
+
+<!--
 ### inet_want_endpoint_dns
 Tells inet to include support for the corresponding protocol.
 
 **Current value (from the default):** `true`
 
 From [//third_party/openweave-core/config.gni:10](https://fuchsia.googlesource.com/third_party/openweave-core/+/3203ab69f65bbc9a49e75c64c08b929e07cd02f4/config.gni#10)
+-->
 
+### 
+
+<!--
 ### inet_want_endpoint_raw
 
 **Current value (from the default):** `true`
 
 From [//third_party/openweave-core/config.gni:11](https://fuchsia.googlesource.com/third_party/openweave-core/+/3203ab69f65bbc9a49e75c64c08b929e07cd02f4/config.gni#11)
+-->
 
+### 
+
+<!--
 ### inet_want_endpoint_tcp
 
 **Current value (from the default):** `true`
 
 From [//third_party/openweave-core/config.gni:12](https://fuchsia.googlesource.com/third_party/openweave-core/+/3203ab69f65bbc9a49e75c64c08b929e07cd02f4/config.gni#12)
+-->
 
+### 
+
+<!--
 ### inet_want_endpoint_tun
 
 **Current value (from the default):** `true`
 
 From [//third_party/openweave-core/config.gni:14](https://fuchsia.googlesource.com/third_party/openweave-core/+/3203ab69f65bbc9a49e75c64c08b929e07cd02f4/config.gni#14)
+-->
 
+### 
+
+<!--
 ### inet_want_endpoint_udp
 
 **Current value (from the default):** `true`
 
 From [//third_party/openweave-core/config.gni:13](https://fuchsia.googlesource.com/third_party/openweave-core/+/3203ab69f65bbc9a49e75c64c08b929e07cd02f4/config.gni#13)
+-->
 
+### 
+
+<!--
 ### is_analysis
 If set, the build will produce compilation analysis dumps, used for code
 cross-referencing in code search.  The extra work done during analysis
@@ -1619,7 +2361,11 @@ and the analysis overhead turned off by default.
 **Current value (from the default):** `false`
 
 From //build/config/BUILDCONFIG.gn:24
+-->
 
+### 
+
+<!--
 ### is_debug
 Debug build.
 
@@ -1638,13 +2384,21 @@ From //out/not-default/args.gn:6
 **Overridden from the default:** `true`
 
 From //build/config/BUILDCONFIG.gn:27
+-->
 
+### 
+
+<!--
 ### kernel_base
 
 **Current value (from the default):** `"0xffffffff00000000"`
 
 From //zircon/kernel/params.gni:29
+-->
 
+### 
+
+<!--
 ### kernel_debug_level
 Enables various kernel debugging and diagnostic features.  Valid
 values are between 0-3.  The higher the value, the more that are
@@ -1656,7 +2410,11 @@ the two and set kernel_debug_level independently.
 **Current value (from the default):** `2`
 
 From //zircon/kernel/params.gni:79
+-->
 
+### 
+
+<!--
 ### kernel_debug_print_level
 Controls the verbosity of kernel dprintf messages. The higher the value,
 the more dprintf messages emitted. Valid values are 0-2 (inclusive):
@@ -1667,7 +2425,11 @@ the more dprintf messages emitted. Valid values are 0-2 (inclusive):
 **Current value (from the default):** `2`
 
 From //zircon/kernel/params.gni:86
+-->
 
+### 
+
+<!--
 ### kernel_extra_defines
 Extra macro definitions for kernel code, e.g. "DISABLE_KASLR",
 "ENABLE_KERNEL_LL_DEBUG".
@@ -1675,7 +2437,11 @@ Extra macro definitions for kernel code, e.g. "DISABLE_KASLR",
 **Current value (from the default):** `[]`
 
 From //zircon/kernel/params.gni:71
+-->
 
+### 
+
+<!--
 ### kernel_version_git_checkout
 By default the kernel version string is generated based on the full git
 revision found by `git rev-parse HEAD` in this checkout directory.
@@ -1683,7 +2449,11 @@ revision found by `git rev-parse HEAD` in this checkout directory.
 **Current value (from the default):** `"//zircon/.."`
 
 From //zircon/kernel/lib/version/BUILD.gn:20
+-->
 
+### 
+
+<!--
 ### kernel_version_git_dirty_check
 If this is true, then the kernel version string generated based on
 `kernel_version_git_checkout` also adds a "-dirty" suffix if any files in
@@ -1692,7 +2462,11 @@ the checkout are modified from what's committed in git.
 **Current value (from the default):** `true`
 
 From //zircon/kernel/lib/version/BUILD.gn:25
+-->
 
+### 
+
+<!--
 ### kernel_version_string
 Version string embedded in the kernel for `zx_system_get_version_string`.
 If set to the default "", a string is generated based on the
@@ -1702,7 +2476,11 @@ settings, which see.
 **Current value (from the default):** `""`
 
 From //zircon/kernel/lib/version/BUILD.gn:16
+-->
 
+### 
+
+<!--
 ### known_variants
 List of variants that will form the basis for variant toolchains.
 To make use of a variant, set [`select_variant`](#select_variant).
@@ -1856,7 +2634,11 @@ Each element of the list is one variant, which is a scope defining:
 ```
 
 From //build/config/BUILDCONFIG.gn:1202
+-->
 
+### 
+
+<!--
 ### launch_basemgr_on_boot
 Indicates whether to include basemgr.cmx in the boot sequence for the
 product image.
@@ -1864,7 +2646,11 @@ product image.
 **Current value (from the default):** `true`
 
 From //src/modular/build/modular_config/modular_config.gni:12
+-->
 
+### 
+
+<!--
 ### linux_runner_extras_tests
 If `true`, adds additional testonly content to extras.img, which will be
 built and mounted inside the container at /mnt/chromeos.
@@ -1872,13 +2658,21 @@ built and mounted inside the container at /mnt/chromeos.
 **Current value (from the default):** `false`
 
 From //src/virtualization/packages/biscotti_guest/linux_runner/BUILD.gn:28
+-->
 
+### 
+
+<!--
 ### linux_runner_gateway
 
 **Current value (from the default):** `"10.0.0.1"`
 
 From //src/virtualization/packages/biscotti_guest/linux_runner/BUILD.gn:23
+-->
 
+### 
+
+<!--
 ### linux_runner_ip
 Default values for the guest network configuration.
 
@@ -1890,20 +2684,32 @@ See //src/virtualization/bin/vmm/device/virtio_net.cc for more details.
 **Current value (from the default):** `"10.0.0.2"`
 
 From //src/virtualization/packages/biscotti_guest/linux_runner/BUILD.gn:22
+-->
 
+### 
+
+<!--
 ### linux_runner_netmask
 
 **Current value (from the default):** `"255.255.255.0"`
 
 From //src/virtualization/packages/biscotti_guest/linux_runner/BUILD.gn:24
+-->
 
+### 
+
+<!--
 ### linux_runner_user_extras
 Point this to the location of external files to be included as extras
 
 **Current value (from the default):** `[]`
 
 From //src/virtualization/packages/biscotti_guest/linux_runner/BUILD.gn:36
+-->
 
+### 
+
+<!--
 ### linux_runner_volatile_block
 If `true`, all block devices that would normally load as READ_WRITE will
 be loaded as VOLATILE_WRITE. This is useful when working on changes to
@@ -1912,7 +2718,11 @@ the linux kernel as crashes and panics can sometimes corrupt the images.
 **Current value (from the default):** `false`
 
 From //src/virtualization/packages/biscotti_guest/linux_runner/BUILD.gn:33
+-->
 
+### 
+
+<!--
 ### local_bench
 Used to enable local benchmarking/fine-tuning when running benchmarks
 in `fx shell`. Pass `--args=local_bench='true'` to `fx set` in order to
@@ -1921,13 +2731,21 @@ enable it.
 **Current value (from the default):** `false`
 
 From //src/developer/fuchsia-criterion/BUILD.gn:13
+-->
 
+### 
+
+<!--
 ### log_startup_sleep
 
 **Current value (from the default):** `"30000"`
 
 From //garnet/bin/log_listener/BUILD.gn:13
+-->
 
+### 
+
+<!--
 ### lsan_default_options
 Default [LeakSanitizer](https://clang.llvm.org/docs/LeakSanitizer.html)
 options (before the `LSAN_OPTIONS` environment variable is read at
@@ -1943,13 +2761,21 @@ injected that way can override that option's setting in this list.
 **Current value (from the default):** `[]`
 
 From //build/config/sanitizers/sanitizer_default_options.gni:35
+-->
 
+### 
+
+<!--
 ### magma_build_root
 
 **Current value (from the default):** `"//src/graphics/lib/magma"`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:13
+-->
 
+### 
+
+<!--
 ### magma_enable_developer_build
 Enable this to have the msd include a suite of tests and invoke them
 automatically when the driver starts.
@@ -1957,34 +2783,54 @@ automatically when the driver starts.
 **Current value (from the default):** `false`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:27
+-->
 
+### 
+
+<!--
 ### magma_enable_tracing
 Enable this to include fuchsia tracing capability
 
 **Current value (from the default):** `true`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:23
+-->
 
+### 
+
+<!--
 ### magma_openvx_include
 The path to OpenVX headers
 
 **Current value (from the default):** `""`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:35
+-->
 
+### 
+
+<!--
 ### magma_openvx_package
 The path to an OpenVX implementation
 
 **Current value (from the default):** `""`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:38
+-->
 
+### 
+
+<!--
 ### magma_python_path
 
 **Current value (from the default):** `"/b/s/w/ir/x/w/third_party/mako"`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:20
+-->
 
+### 
+
+<!--
 ### max_blob_contents_size
 Maximum allowable contents for the /blob in a release mode build.
 Zero means no limit.
@@ -1994,7 +2840,11 @@ of how they are stored).
 **Current value (from the default):** `"0"`
 
 From //build/images/filesystem_limits.gni:10
+-->
 
+### 
+
+<!--
 ### max_blob_image_size
 Maximum allowable image_size for /blob in a release mode build.
 Zero means no limit.
@@ -2004,7 +2854,11 @@ metadata.
 **Current value (from the default):** `"0"`
 
 From //build/images/filesystem_limits.gni:16
+-->
 
+### 
+
+<!--
 ### max_data_contents_size
 Maximum allowable contents_size for /data in a release mode build.
 Zero means no limit.
@@ -2014,7 +2868,11 @@ of how they are stored).
 **Current value (from the default):** `"0"`
 
 From //build/images/filesystem_limits.gni:22
+-->
 
+### 
+
+<!--
 ### max_data_image_size
 Maximum allowable image_size for /data in a release mode build.
 Zero means no limit.
@@ -2024,7 +2882,11 @@ metadata.
 **Current value (from the default):** `"0"`
 
 From //build/images/filesystem_limits.gni:28
+-->
 
+### 
+
+<!--
 ### max_fuchsia_zbi_size
 Maximum allowable size for fuchsia.zbi
 
@@ -2043,7 +2905,11 @@ From //boards/common/x64-common.gni:74
 **Overridden from the default:** `"0"`
 
 From //build/images/filesystem_limits.gni:31
+-->
 
+### 
+
+<!--
 ### max_fvm_size
 Maximum allowable size for the FVM in a release mode build
 Zero means no limit
@@ -2051,7 +2917,11 @@ Zero means no limit
 **Current value (from the default):** `"0"`
 
 From //build/images/max_fvm_size.gni:8
+-->
 
+### 
+
+<!--
 ### max_log_disk_usage
 Controls how many bytes of space on disk are used to persist device logs.
 Should be a string value that only contains digits.
@@ -2059,7 +2929,11 @@ Should be a string value that only contains digits.
 **Current value (from the default):** `"0"`
 
 From //garnet/bin/log_listener/BUILD.gn:12
+-->
 
+### 
+
+<!--
 ### max_zedboot_zbi_size
 Maximum allowable size for zedboot.zbi
 
@@ -2078,21 +2952,33 @@ From //boards/common/x64-common.gni:75
 **Overridden from the default:** `"0"`
 
 From //build/images/filesystem_limits.gni:34
+-->
 
+### 
+
+<!--
 ### mbedtls_config_file
 Configuration file for MbedTLS.
 
 **Current value (from the default):** `"mbedtls-config.h"`
 
 From [//third_party/openthread/third_party/mbedtls/BUILD.gn:30](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/third_party/mbedtls/BUILD.gn#30)
+-->
 
+### 
+
+<!--
 ### mbedtls_deps
 Extra dependencies for MbedTLS
 
 **Current value (from the default):** `["../../src/core:libopenthread_core_config"]`
 
 From [//third_party/openthread/third_party/mbedtls/BUILD.gn:33](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/third_party/mbedtls/BUILD.gn#33)
+-->
 
+### 
+
+<!--
 ### meta_package_labels
 A list of labels for meta packages to be included in the monolith.
 
@@ -2111,25 +2997,41 @@ From //products/bringup.gni:49
 **Overridden from the default:** `[]`
 
 From //build/images/args.gni:64
+-->
 
+### 
+
+<!--
 ### minfs_board_maximum_bytes
 
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:86
+-->
 
+### 
+
+<!--
 ### minfs_board_minimum_data_bytes
 
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:73
+-->
 
+### 
+
+<!--
 ### minfs_board_minimum_inodes
 
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:63
+-->
 
+### 
+
+<!--
 ### minfs_enable_dirty_cache
 Set this to true when configuring gn args to enable minfs dirty cache.
 This is a compile time argument instead of mount time argument because
@@ -2141,7 +3043,11 @@ dirty cache. This ensures that we run what we test.
 **Current value (from the default):** `false`
 
 From //src/storage/minfs/BUILD.gn:12
+-->
 
+### 
+
+<!--
 ### minfs_maximum_runtime_bytes
 minfs_maximum_runtime_bytes is an upper bound on the partition size on the device. Partitions
 can grow as needed if there are extra slices available in FVM. This limit prevents the minfs
@@ -2152,44 +3058,72 @@ Pass the empty string for no limit.
 **Current value (from the default):** `""`
 
 From //src/storage/fshost/BUILD.gn:23
+-->
 
+### 
+
+<!--
 ### minfs_product_maximum_bytes
 
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:87
+-->
 
+### 
+
+<!--
 ### minfs_product_minimum_data_bytes
 
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:74
+-->
 
+### 
+
+<!--
 ### minfs_product_minimum_inodes
 
 **Current value (from the default):** `""`
 
 From //build/images/fvm.gni:64
+-->
 
+### 
+
+<!--
 ### mini_chromium_is_chromeos_ash
 
 **Current value (from the default):** `false`
 
 From [//third_party/crashpad/third_party/mini_chromium/mini_chromium/build/platform.gni:31](https://chromium.googlesource.com/crashpad/crashpad/+/0c3d6e5fa10fcac9ca63df7d3fb68ef7f7bd5f3c/third_party/mini_chromium/mini_chromium/build/platform.gni#31)
+-->
 
+### 
+
+<!--
 ### mini_chromium_is_chromeos_lacros
 
 **Current value (from the default):** `false`
 
 From [//third_party/crashpad/third_party/mini_chromium/mini_chromium/build/platform.gni:30](https://chromium.googlesource.com/crashpad/crashpad/+/0c3d6e5fa10fcac9ca63df7d3fb68ef7f7bd5f3c/third_party/mini_chromium/mini_chromium/build/platform.gni#30)
+-->
 
+### 
+
+<!--
 ### msd_arm_enable_all_cores
 Enable all 8 cores, which is faster but emits more heat.
 
 **Current value (from the default):** `true`
 
 From //src/graphics/drivers/msd-arm-mali/src/BUILD.gn:9
+-->
 
+### 
+
+<!--
 ### msd_arm_enable_cache_coherency
 With this flag set the system tries to use cache coherent memory if the
 GPU supports it.
@@ -2197,7 +3131,11 @@ GPU supports it.
 **Current value (from the default):** `true`
 
 From //src/graphics/drivers/msd-arm-mali/src/BUILD.gn:13
+-->
 
+### 
+
+<!--
 ### msd_arm_enable_protected_debug_swap_mode
 In protected mode, faults don't return as much information so they're much harder to debug. To
 work around that, add a mode where protected atoms are executed in non-protected mode and
@@ -2211,485 +3149,765 @@ precommitted (which is not done by default).
 **Current value (from the default):** `false`
 
 From //src/graphics/drivers/msd-arm-mali/src/BUILD.gn:23
+-->
 
+### 
+
+<!--
 ### msd_build_root
 
 **Current value (from the default):** `"//src/graphics/drivers"`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:15
+-->
 
+### 
+
+<!--
 ### msd_intel_gen_build_root
 
 **Current value (from the default):** `"//src/graphics/drivers/msd-intel-gen"`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:16
+-->
 
+### 
+
+<!--
 ### netcfg_autostart
 
 **Current value (from the default):** `true`
 
 From //src/connectivity/management/BUILD.gn:6
+-->
 
+### 
+
+<!--
 ### netsvc_extra_defines
 
 **Current value (from the default):** `[]`
 
 From //src/bringup/bin/netsvc/BUILD.gn:22
+-->
 
+### 
+
+<!--
 ### omaha_app_id
 Default app id will always return no update.
 
 **Current value (from the default):** `"fuchsia-test:no-update"`
 
 From //src/sys/pkg/bin/omaha-client/BUILD.gn:13
+-->
 
+### 
+
+<!--
 ### openthread_config_assert_enable
 Enable assertions.
 
 **Current value (from the default):** `true`
 
 From [//third_party/openthread/etc/gn/openthread.gni:79](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#79)
+-->
 
+### 
+
+<!--
 ### openthread_config_backbone_router_enable
 Enable backbone router functionality
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:82](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#82)
+-->
 
+### 
+
+<!--
 ### openthread_config_border_agent_enable
 Enable border agent support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:85](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#85)
+-->
 
+### 
+
+<!--
 ### openthread_config_border_router_enable
 Enable border router support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:88](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#88)
+-->
 
+### 
+
+<!--
 ### openthread_config_border_routing_enable
 Enable border routing support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:91](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#91)
+-->
 
+### 
+
+<!--
 ### openthread_config_channel_manager_enable
 Enable channel manager support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:94](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#94)
+-->
 
+### 
+
+<!--
 ### openthread_config_channel_monitor_enable
 Enable channel monitor support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:97](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#97)
+-->
 
+### 
+
+<!--
 ### openthread_config_child_supervision_enable
 Enable child supervision support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:100](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#100)
+-->
 
+### 
+
+<!--
 ### openthread_config_coap_api_enable
 Enable coap api support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:103](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#103)
+-->
 
+### 
+
+<!--
 ### openthread_config_coap_observe_api_enable
 Enable coap observe (RFC7641) api support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:109](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#109)
+-->
 
+### 
+
+<!--
 ### openthread_config_coap_secure_api_enable
 Enable secure coap api support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:106](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#106)
+-->
 
+### 
+
+<!--
 ### openthread_config_commissioner_enable
 Enable commissioner support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:112](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#112)
+-->
 
+### 
+
+<!--
 ### openthread_config_deps
 Extra deps for OpenThread configuration.
 
 **Current value (from the default):** `[]`
 
 From [//third_party/openthread/etc/gn/openthread.gni:38](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#38)
+-->
 
+### 
+
+<!--
 ### openthread_config_dhcp6_client_enable
 Enable DHCP6 client support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:118](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#118)
+-->
 
+### 
+
+<!--
 ### openthread_config_dhcp6_server_enable
 Enable DHCP6 server support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:121](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#121)
+-->
 
+### 
+
+<!--
 ### openthread_config_diag_enable
 Enable diagnostic support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:124](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#124)
+-->
 
+### 
+
+<!--
 ### openthread_config_dns_client_enable
 Enable DNS client support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:127](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#127)
+-->
 
+### 
+
+<!--
 ### openthread_config_dnssd_server_enable
 Enable DNS-SD server support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:130](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#130)
+-->
 
+### 
+
+<!--
 ### openthread_config_dua_enable
 Enable Domain Unicast Address feature for Thread 1.2
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:136](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#136)
+-->
 
+### 
+
+<!--
 ### openthread_config_ecdsa_enable
 Enable ECDSA support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:133](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#133)
+-->
 
+### 
+
+<!--
 ### openthread_config_enable_builtin_mbedtls_management
 
 **Current value (from the default):** `true`
 
 From [//third_party/openthread/etc/gn/openthread.gni:230](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#230)
+-->
 
+### 
+
+<!--
 ### openthread_config_file
 OpenThread config header.
 
 **Current value (from the default):** `"<openthread-config-android.h>"`
 
 From [//third_party/openthread/etc/gn/openthread.gni:35](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#35)
+-->
 
+### 
+
+<!--
 ### openthread_config_full_logs
 Enable full logs
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:217](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#217)
+-->
 
+### 
+
+<!--
 ### openthread_config_heap_external_enable
 Enable external heap support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:142](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#142)
+-->
 
+### 
+
+<!--
 ### openthread_config_ip6_fragmentation_enable
 Enable ipv6 fragmentation support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:145](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#145)
+-->
 
+### 
+
+<!--
 ### openthread_config_ip6_slaac_enable
 Enable support for adding of auto-configured SLAAC addresses by OpenThread
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:196](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#196)
+-->
 
+### 
+
+<!--
 ### openthread_config_jam_detection_enable
 Enable jam detection support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:148](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#148)
+-->
 
+### 
+
+<!--
 ### openthread_config_joiner_enable
 Enable joiner support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:151](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#151)
+-->
 
+### 
+
+<!--
 ### openthread_config_legacy_enable
 Enable legacy network support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:154](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#154)
+-->
 
+### 
+
+<!--
 ### openthread_config_link_metrics_enable
 Enable link metrics
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:157](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#157)
+-->
 
+### 
+
+<!--
 ### openthread_config_link_raw_enable
 Enable link raw service
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:160](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#160)
+-->
 
+### 
+
+<!--
 ### openthread_config_log_level_dynamic_enable
 Enable dynamic log level control
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:163](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#163)
+-->
 
+### 
+
+<!--
 ### openthread_config_log_output
 Log output: none, debug_uart, app, platform
 
 **Current value (from the default):** `""`
 
 From [//third_party/openthread/etc/gn/openthread.gni:76](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#76)
+-->
 
+### 
+
+<!--
 ### openthread_config_mac_csl_receiver_enable
 Enable csl receiver
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:115](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#115)
+-->
 
+### 
+
+<!--
 ### openthread_config_mac_filter_enable
 Enable mac filter support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:166](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#166)
+-->
 
+### 
+
+<!--
 ### openthread_config_message_use_heap
 Enable use built-in heap for message buffers
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:169](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#169)
+-->
 
+### 
+
+<!--
 ### openthread_config_mle_long_routes_enable
 Enable MLE long routes extension (experimental, breaks Thread conformance]
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:172](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#172)
+-->
 
+### 
+
+<!--
 ### openthread_config_mlr_enable
 Enable Multicast Listener Registration feature for Thread 1.2
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:139](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#139)
+-->
 
+### 
+
+<!--
 ### openthread_config_multiple_instance_enable
 Enable multiple instances
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:178](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#178)
+-->
 
+### 
+
+<!--
 ### openthread_config_ncp_hdlc_enable
 Enable NCP HDLC support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:226](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#226)
+-->
 
+### 
+
+<!--
 ### openthread_config_ncp_spi_enable
 Enable NCP SPI support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:223](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#223)
+-->
 
+### 
+
+<!--
 ### openthread_config_otns_enable
 Enable OTNS support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:220](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#220)
+-->
 
+### 
+
+<!--
 ### openthread_config_ping_sender
 Enable ping sender support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:208](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#208)
+-->
 
+### 
+
+<!--
 ### openthread_config_platform_netif_enable
 Enable platform netif support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:181](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#181)
+-->
 
+### 
+
+<!--
 ### openthread_config_platform_udp_enable
 Enable platform UDP support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:184](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#184)
+-->
 
+### 
+
+<!--
 ### openthread_config_reference_device_enable
 Enable Thread Test Harness reference device support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:187](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#187)
+-->
 
+### 
+
+<!--
 ### openthread_config_sntp_client_enable
 Enable SNTP Client support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:199](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#199)
+-->
 
+### 
+
+<!--
 ### openthread_config_srp_client_enable
 Enable SRP Client support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:202](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#202)
+-->
 
+### 
+
+<!--
 ### openthread_config_srp_server_enable
 Enable SRP Server support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:205](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#205)
+-->
 
+### 
+
+<!--
 ### openthread_config_thread_version
 Thread version: 1.1, 1.2
 
 **Current value (from the default):** `"1.1"`
 
 From [//third_party/openthread/etc/gn/openthread.gni:73](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#73)
+-->
 
+### 
+
+<!--
 ### openthread_config_time_sync_enable
 Enable the time synchronization service feature
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:211](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#211)
+-->
 
+### 
+
+<!--
 ### openthread_config_tmf_netdata_service_enable
 Enable support for injecting Service entries into the Thread Network Data
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:190](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#190)
+-->
 
+### 
+
+<!--
 ### openthread_config_tmf_network_diag_mtd_enable
 Enable TMF network diagnostics on MTDs
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:175](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#175)
+-->
 
+### 
+
+<!--
 ### openthread_config_udp_forward_enable
 Enable UDP forward support
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:214](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#214)
+-->
 
+### 
+
+<!--
 ### openthread_core_config_deps
 Extra deps for OpenThread core configuration.
 
 **Current value (from the default):** `[]`
 
 From [//third_party/openthread/etc/gn/openthread.gni:50](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#50)
+-->
 
+### 
+
+<!--
 ### openthread_core_config_platform_check_file
 OpenThread platform-specific config check header
 
 **Current value (from the default):** `""`
 
 From [//third_party/openthread/etc/gn/openthread.gni:47](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#47)
+-->
 
+### 
+
+<!--
 ### openthread_enable_core_config_args
 Configure OpenThread via GN arguments.
 
 **Current value (from the default):** `true`
 
 From [//third_party/openthread/etc/gn/openthread.gni:67](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#67)
+-->
 
+### 
+
+<!--
 ### openthread_external_mbedtls
 Use external mbedtls. If blank, internal mbedtls will be used.
 
 **Current value (from the default):** `""`
 
 From [//third_party/openthread/etc/gn/openthread.gni:56](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#56)
+-->
 
+### 
+
+<!--
 ### openthread_external_platform
 Use external platform.
 
 **Current value (from the default):** `""`
 
 From [//third_party/openthread/etc/gn/openthread.gni:53](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#53)
+-->
 
+### 
+
+<!--
 ### openthread_package_name
 Package name for OpenThread.
 
 **Current value (from the default):** `"OPENTHREAD"`
 
 From [//third_party/openthread/etc/gn/openthread.gni:59](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#59)
+-->
 
+### 
+
+<!--
 ### openthread_package_version
 Package version for OpenThread.
 
 **Current value (from the default):** `"1.0.0"`
 
 From [//third_party/openthread/etc/gn/openthread.gni:62](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#62)
+-->
 
+### 
+
+<!--
 ### openthread_project_core_config_file
 OpenThread project-specific core config header
 
 **Current value (from the default):** `""`
 
 From [//third_party/openthread/etc/gn/openthread.gni:44](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#44)
+-->
 
+### 
+
+<!--
 ### openthread_project_include_dirs
 Include directories for project specific configs.
 
 **Current value (from the default):** `[]`
 
 From [//third_party/openthread/etc/gn/openthread.gni:41](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#41)
+-->
 
+### 
+
+<!--
 ### openthread_settings_ram
 Enable volatile-only storage of settings
 
 **Current value (from the default):** `false`
 
 From [//third_party/openthread/etc/gn/openthread.gni:193](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/etc/gn/openthread.gni#193)
+-->
 
+### 
+
+<!--
 ### optimize
 * `none`: really unoptimized, usually only build-tested and not run
 * `debug`: "optimized for debugging", light enough to avoid confusion
@@ -2703,21 +3921,33 @@ From [//third_party/openthread/etc/gn/openthread.gni:193](https://fuchsia.google
 **Current value (from the default):** `"speed"`
 
 From //build/config/compiler.gni:23
+-->
 
+### 
+
+<!--
 ### output_breakpad_syms
 Sets if we should output breakpad symbols for Fuchsia binaries.
 
 **Current value (from the default):** `false`
 
 From //build/config/BUILDCONFIG.gn:30
+-->
 
+### 
+
+<!--
 ### output_gsym
 Controls whether we should output GSYM files for Fuchsia binaries.
 
 **Current value (from the default):** `false`
 
 From //build/config/BUILDCONFIG.gn:33
+-->
 
+### 
+
+<!--
 ### package_flavor_selections
 Used to configure the set of package flavors desired.
 
@@ -2755,38 +3985,62 @@ From //products/bringup.gni:69
 **Overridden from the default:** `[]`
 
 From //build/packages/prebuilt_package_with_flavors.gni:29
+-->
 
+### 
+
+<!--
 ### persist_logs
 
 **Current value (from the default):** `false`
 
 From //build/persist_logs.gni:13
+-->
 
+### 
+
+<!--
 ### pkgfs_packages_allowlist
 
 **Current value (from the default):** `"//src/security/policy/pkgfs_non_static_pkgs_allowlist_eng.txt"`
 
 From //build/images/args.gni:113
+-->
 
+### 
+
+<!--
 ### platform_enable_user_pci
 
 **Current value (from the default):** `false`
 
 From //src/devices/bus/drivers/pci/pci.gni:10
+-->
 
+### 
+
+<!--
 ### pmm_checker_from_board
 Used to control whether board definitions include PMM checker options.
 
 **Current value (from the default):** `true`
 
 From //boards/kernel_cmdline/BUILD.gn:34
+-->
 
+### 
+
+<!--
 ### pre_erase_flash
 
 **Current value (from the default):** `false`
 
 From //build/images/args.gni:84
+-->
 
+### 
+
+<!--
 ### prebuilt_dart_sdk
 Directory containing prebuilt Dart SDK.
 This must have in its `bin/` subdirectory `gen_snapshot.OS-CPU` binaries.
@@ -2794,20 +4048,32 @@ This must have in its `bin/` subdirectory `gen_snapshot.OS-CPU` binaries.
 **Current value (from the default):** `"//prebuilt/third_party/dart/linux-x64"`
 
 From //build/dart/dart.gni:8
+-->
 
+### 
+
+<!--
 ### prebuilt_libvulkan_arm_path
 
 **Current value (from the default):** `""`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:29
+-->
 
+### 
+
+<!--
 ### prebuilt_libvulkan_img_path
 The path to a prebuilt libvulkan.so for an IMG GPU.
 
 **Current value (from the default):** `""`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:32
+-->
 
+### 
+
+<!--
 ### product_bootfs_labels
 A list of binary labels to include in ZBIs built for this product.
 
@@ -2826,7 +4092,11 @@ From //products/bringup.gni:41
 **Overridden from the default:** `[]`
 
 From //build/product.gni:7
+-->
 
+### 
+
+<!--
 ### product_include_updates_in_blobfs
 Include update package in blob.blk. Some products may not need the update
 package included as part of the blobfs.
@@ -2835,14 +4105,22 @@ TODO(fxbug.dev/58645) Remove when no longer needed.
 **Current value (from the default):** `true`
 
 From //build/product.gni:15
+-->
 
+### 
+
+<!--
 ### product_system_image_deps
 A list of binary labels to include in the system_image package.
 
 **Current value (from the default):** `[]`
 
 From //build/product.gni:10
+-->
 
+### 
+
+<!--
 ### prototype_account_transfer
 Whether or not prototype account transfer is enabled.
 NOTE: This is not secure and should NOT be enabled for any products!  This
@@ -2851,7 +4129,11 @@ is only for use during local development.
 **Current value (from the default):** `false`
 
 From //src/identity/bin/account_manager/BUILD.gn:12
+-->
 
+### 
+
+<!--
 ### recovery_label
 Allows a product to specify the recovery image used in the zirconr slot.
 Default recovery image is zedboot. Overriding this value will keep zedboot
@@ -2864,14 +4146,22 @@ Example value: "//build/images/recovery"
 **Current value (from the default):** `"//build/images/zedboot"`
 
 From //build/images/args.gni:125
+-->
 
+### 
+
+<!--
 ### recovery_logo_path
 Path to file to use for recovery logo
 
 **Current value (from the default):** `"//src/recovery/system/res/fuchsia-logo.shed"`
 
 From //src/recovery/system/system_recovery_args.gni:7
+-->
 
+### 
+
+<!--
 ### recovery_static_pkgs_goldens
 An optional list of golden files for recovery.zbi static pkgs list. If
 specified, they would be compared against recovery.zbi static pkgs list
@@ -2890,7 +4180,11 @@ above changes.
 **Current value (from the default):** `[]`
 
 From //build/security.gni:96
+-->
 
+### 
+
+<!--
 ### recovery_zbi_bootfs_filelist_goldens
 An optional list of golden files for recovery.zbi bootFS file list. If
 specified, they would be compared against recovery.zbi bootFS file list
@@ -2909,7 +4203,11 @@ above changes.
 **Current value (from the default):** `[]`
 
 From //build/security.gni:66
+-->
 
+### 
+
+<!--
 ### recovery_zbi_kernel_cmdline_goldens
 An optional list of golden files for recovery.zbi kernel cmdline args. If
 specified, they would be compared against recovery.zbi kernel cmdline
@@ -2928,13 +4226,21 @@ above changes.
 **Current value (from the default):** `[]`
 
 From //build/security.gni:36
+-->
 
+### 
+
+<!--
 ### run_slow_bssl_tests
 
 **Current value (from the default):** `false`
 
 From [//third_party/boringssl/BUILD.gn:14](https://fuchsia.googlesource.com/third_party/boringssl/+/d9d1152860fb59239f40b201bfde3132c1b62b0e/BUILD.gn#14)
+-->
 
+### 
+
+<!--
 ### rust_cap_lints
 Sets the maximum lint level.
 "deny" will make all warnings into errors, "warn" preserves them as warnings, and "allow" will
@@ -2943,7 +4249,11 @@ ignore warnings.
 **Current value (from the default):** `"deny"`
 
 From //build/rust/config.gni:53
+-->
 
+### 
+
+<!--
 ### rust_incremental
 Enable incremental rust compilation. Takes a path to the directory to use
 as the cache.
@@ -2951,14 +4261,22 @@ as the cache.
 **Current value (from the default):** `""`
 
 From //build/config/rust/BUILD.gn:17
+-->
 
+### 
+
+<!--
 ### rust_lto
 Sets the default LTO type for rustc bulids.
 
 **Current value (from the default):** `""`
 
 From //build/rust/config.gni:45
+-->
 
+### 
+
+<!--
 ### rust_override_lto
 Overrides the LTO setting for all Rust builds, regardless of
 debug/release flags or the `with_lto` arg to the rustc_ templates.
@@ -2967,7 +4285,11 @@ Valid values are "none", "thin", and "fat".
 **Current value (from the default):** `""`
 
 From //build/rust/config.gni:63
+-->
 
+### 
+
+<!--
 ### rust_override_opt
 Overrides the optimization level for all Rust builds, regardless of
 debug/release flags or the `force_opt` arg to the rustc_ templates.
@@ -2976,7 +4298,11 @@ Valid values are 0-3, o, and z.
 **Current value (from the default):** `""`
 
 From //build/rust/config.gni:58
+-->
 
+### 
+
+<!--
 ### rust_sysroot
 Sets a custom base directory for where rust tooling
 looks for the standard library
@@ -2984,14 +4310,22 @@ looks for the standard library
 **Current value (from the default):** `"../../prebuilt/third_party/rust/linux-x64"`
 
 From //build/rust/config.gni:42
+-->
 
+### 
+
+<!--
 ### rust_toolchain_triple_suffix
 Sets the fuchsia toolchain target triple suffix (after arch)
 
 **Current value (from the default):** `"fuchsia"`
 
 From //build/rust/config.gni:48
+-->
 
+### 
+
+<!--
 ### rust_v0_symbol_mangling
 Controls whether the rust compiler uses v0 symbol mangling scheme
 (see https://github.com/rust-lang/rfcs/blob/HEAD/text/2603-rust-symbol-name-mangling-v0.md).
@@ -3002,14 +4336,22 @@ TODO(fxbug.dev/57302): Enable v0 mangling by default.
 **Current value (from the default):** `false`
 
 From //build/config/rust/BUILD.gn:13
+-->
 
+### 
+
+<!--
 ### rustc_lib_dir
 Path to rustc lib directory.
 
 **Current value (from the default):** `"../../prebuilt/third_party/rust/linux-x64/lib"`
 
 From //build/images/manifest.gni:16
+-->
 
+### 
+
+<!--
 ### rustc_prefix
 Sets a custom base directory for `rustc` and `cargo`.
 This can be used to test custom Rust toolchains.
@@ -3017,7 +4359,11 @@ This can be used to test custom Rust toolchains.
 **Current value (from the default):** `"../../prebuilt/third_party/rust/linux-x64/bin"`
 
 From //build/rust/config.gni:24
+-->
 
+### 
+
+<!--
 ### rustc_version_description
 Human-readable identifier for the toolchain version.
 
@@ -3027,7 +4373,11 @@ e.g., clang_version_description = read_file("$_rustc_lib_dir/VERSION")
 **Current value (from the default):** `""`
 
 From //build/rust/config.gni:38
+-->
 
+### 
+
+<!--
 ### rustc_version_string
 This is a string identifying the particular toolchain version in use.  Its
 only purpose is to be unique enough that it changes when switching to a new
@@ -3039,27 +4389,43 @@ prebuilt is used.
 **Current value (from the default):** `"8HYUPLBQS_Odv6Q7gCroGEelRYTxK94IuJh03o8bggIC"`
 
 From //build/rust/config.gni:32
+-->
 
+### 
+
+<!--
 ### scenic_display_frame_number
 Draws the current frame number in the top-left corner.
 
 **Current value (from the default):** `false`
 
 From //src/ui/scenic/lib/gfx/BUILD.gn:12
+-->
 
+### 
+
+<!--
 ### scenic_enable_vulkan_validation
 Include the vulkan validation layers in scenic.
 
 **Current value (from the default):** `false`
 
 From //src/ui/scenic/lib/gfx/build_args.gni:7
+-->
 
+### 
+
+<!--
 ### scenic_ignore_vsync
 
 **Current value (from the default):** `false`
 
 From //src/ui/scenic/lib/gfx/BUILD.gn:9
+-->
 
+### 
+
+<!--
 ### scheduler_queue_tracing_enabled
 Enables scheduler queue tracing for trace-based scheduler performance
 analysis.
@@ -3067,7 +4433,11 @@ analysis.
 **Current value (from the default):** `false`
 
 From //zircon/kernel/params.gni:48
+-->
 
+### 
+
+<!--
 ### scheduler_tracing_level
 The level of detail for scheduler traces when enabled. Values greater than
 zero add increasing details at the cost of increased trace buffer use.
@@ -3080,7 +4450,11 @@ zero add increasing details at the cost of increased trace buffer use.
 **Current value (from the default):** `0`
 
 From //zircon/kernel/params.gni:44
+-->
 
+### 
+
+<!--
 ### scudo_default_options
 Default [Scudo](https://llvm.org/docs/ScudoHardenedAllocator.html) options
 (before the `SCUDO_OPTIONS` environment variable is read at runtime).
@@ -3101,7 +4475,11 @@ tests) can use the sanitizer_extra_options() mechanism instead.
 **Current value (from the default):** `[]`
 
 From //build/config/sanitizers/sanitizer_default_options.gni:67
+-->
 
+### 
+
+<!--
 ### sdk_dirs
 The directories to search for parts of the SDK.
 
@@ -3111,14 +4489,22 @@ In the future, we'll search a pre-built SDK as well.
 **Current value (from the default):** `["//garnet/public", "//topaz/public"]`
 
 From //build/config/fuchsia/sdk.gni:10
+-->
 
+### 
+
+<!--
 ### sdk_id
 Identifier for the Core SDK.
 
 **Current value (from the default):** `""`
 
 From //sdk/config.gni:7
+-->
 
+### 
+
+<!--
 ### select_variant
 List of "selectors" to request variant builds of certain targets.
 Each selector specifies matching criteria and a chosen variant.
@@ -3189,7 +4575,11 @@ is satisfied if any of the strings matches against the candidate string.
 **Current value (from the default):** `[]`
 
 From //build/config/BUILDCONFIG.gn:1584
+-->
 
+### 
+
+<!--
 ### select_variant_canonical
 *This should never be set as a build argument.*
 It exists only to be set in `toolchain_args`.
@@ -3198,7 +4588,11 @@ See //build/toolchain/clang_toolchain.gni for details.
 **Current value (from the default):** `[]`
 
 From //build/config/BUILDCONFIG.gn:1589
+-->
 
+### 
+
+<!--
 ### select_variant_shortcuts
 List of short names for commonly-used variant selectors.  Normally this
 is not set as a build argument, but it serves to document the available
@@ -3242,7 +4636,11 @@ a list that can be spliced into [`select_variant`](#select_variant).
 ```
 
 From //build/config/BUILDCONFIG.gn:1397
+-->
 
+### 
+
+<!--
 ### size_checker_input
 The input to the size checker.
 The build system will produce a JSON file to be consumed by the size checker, which
@@ -3294,33 +4692,53 @@ size_checker_input = {
 **Current value (from the default):** `{ }`
 
 From //tools/size_checker/cmd/BUILD.gn:52
+-->
 
+### 
+
+<!--
 ### smp_max_cpus
 
 **Current value (from the default):** `16`
 
 From //zircon/kernel/params.gni:21
+-->
 
+### 
+
+<!--
 ### spinel_platform_header
 Platform portability header for spinel.
 
 **Current value (from the default):** `"\"spinel_platform.h\""`
 
 From [//third_party/openthread/src/lib/spinel/BUILD.gn:32](https://fuchsia.googlesource.com/third_party/openthread/+/93aebf6671f2aa6e8ed2638b1743791b02e3eeb6/src/lib/spinel/BUILD.gn#32)
+-->
 
+### 
+
+<!--
 ### starnix_syscalls_test_label
 
 **Current value (from the default):** `"//prebuilt/starnix/tests/syscalls/linux-amd64/syscalls"`
 
 From //src/proc/tests/android/BUILD.gn:12
+-->
 
+### 
+
+<!--
 ### start_oobe
 Whether or not to launch OOBE workflow on startup.
 
 **Current value (from the default):** `false`
 
 From //src/experiences/session_shells/ermine/shell/BUILD.gn:15
+-->
 
+### 
+
+<!--
 ### sysmgr_golden_warn_override
 Used by config_package().
 If true, then overrides the value of the sysmgr_golden_warn template
@@ -3329,7 +4747,11 @@ parameter to true regardless of whether it is specified on a target.
 **Current value (from the default):** `false`
 
 From //build/config.gni:13
+-->
 
+### 
+
+<!--
 ### target_cpu
 
 **Current value for `target_cpu = "arm64"`:** `"arm64"`
@@ -3343,18 +4765,30 @@ From //out/not-default/args.gn:7
 From //out/not-default/args.gn:7
 
 **Overridden from the default:** `""`
+-->
 
+### 
+
+<!--
 ### target_os
 
 **Current value (from the default):** `""`
+-->
 
+### 
+
+<!--
 ### target_sysroot
 The absolute path of the sysroot that is used with the target toolchain.
 
 **Current value (from the default):** `""`
 
 From //build/config/sysroot.gni:7
+-->
 
+### 
+
+<!--
 ### termina_disk
 The termina disk image.
 
@@ -3364,7 +4798,11 @@ custom disk for development purposes.
 **Current value (from the default):** `"//prebuilt/virtualization/packages/termina_guest/images/arm64/vm_rootfs.img"`
 
 From //src/virtualization/packages/termina_guest/BUILD.gn:18
+-->
 
+### 
+
+<!--
 ### termina_kernel
 The termina kernel image.
 
@@ -3374,7 +4812,11 @@ custom kernel for development purposes.
 **Current value (from the default):** `"//prebuilt/virtualization/packages/linux_guest/images/arm64/Image"`
 
 From //src/virtualization/packages/termina_guest/BUILD.gn:12
+-->
 
+### 
+
+<!--
 ### termina_tools
 The termina tools disk image.
 
@@ -3384,7 +4826,11 @@ custom disk for development purposes.
 **Current value (from the default):** `"//prebuilt/virtualization/packages/termina_guest/images/arm64/vm_tools.img"`
 
 From //src/virtualization/packages/termina_guest/BUILD.gn:24
+-->
 
+### 
+
+<!--
 ### test_durations_file
 A file in containing historical test duration data for this build
 configuration, used used by testsharder to evenly split tests across
@@ -3394,7 +4840,11 @@ afterwards.
 **Current value (from the default):** `""`
 
 From //BUILD.gn:45
+-->
 
+### 
+
+<!--
 ### testonly_in_containers
 Whether to allow testonly=true targets in fuchsia ZBI or base/cache packages.
 
@@ -3411,21 +4861,33 @@ Default value is 'all', it is preferable to set to 'none' for production
 **Current value (from the default):** `"all"`
 
 From //build/security.gni:109
+-->
 
+### 
+
+<!--
 ### thinlto_cache_dir
 ThinLTO cache directory path.
 
 **Current value (from the default):** `"dartlang/thinlto-cache"`
 
 From //build/config/lto/config.gni:16
+-->
 
+### 
+
+<!--
 ### thinlto_jobs
 Number of parallel ThinLTO jobs.
 
 **Current value (from the default):** `8`
 
 From //build/config/lto/config.gni:13
+-->
 
+### 
+
+<!--
 ### time_trace
 Whether to export time traces when building with clang.
 https://releases.llvm.org/9.0.0/tools/clang/docs/ReleaseNotes.html#new-compiler-flags
@@ -3433,7 +4895,11 @@ https://releases.llvm.org/9.0.0/tools/clang/docs/ReleaseNotes.html#new-compiler-
 **Current value (from the default):** `false`
 
 From //build/config/clang/time_trace.gni:8
+-->
 
+### 
+
+<!--
 ### toolchain_variant
 *This should never be set as a build argument.*
 It exists only to be set in `toolchain_args`.
@@ -3497,7 +4963,11 @@ The other fields are the variant's effects as defined in
 ```
 
 From //build/config/BUILDCONFIG.gn:136
+-->
 
+### 
+
+<!--
 ### ubsan_default_options
 Default [UndefinedBehaviorSanitizer](https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html)
 options (before the `UBSAN_OPTIONS` environment variable is read at
@@ -3513,7 +4983,11 @@ injected that way can override that option's setting in this list.
 **Current value (from the default):** `["print_stacktrace=1", "halt_on_error=1"]`
 
 From //build/config/sanitizers/sanitizer_default_options.gni:47
+-->
 
+### 
+
+<!--
 ### universal_variants
 
 **Current value (from the default):**
@@ -3528,7 +5002,11 @@ From //build/config/sanitizers/sanitizer_default_options.gni:47
 ```
 
 From //build/config/BUILDCONFIG.gn:1381
+-->
 
+### 
+
+<!--
 ### universe_package_labels
 If you add package labels to this variable, the packages will be included
 in the 'universe' package set, which represents all software that is
@@ -3552,7 +5030,11 @@ From //products/bringup.gni:57
 **Overridden from the default:** `[]`
 
 From //BUILD.gn:53
+-->
 
+### 
+
+<!--
 ### unpack_debug_archives
 To ensure that everything can be built without debug symbols present we
 gate weather or not these are consumed on a build argument. When set,
@@ -3562,7 +5044,11 @@ debug archives in tar.bzip2 format into the .build-id directory
 **Current value (from the default):** `false`
 
 From //build/packages/prebuilt_package.gni:13
+-->
 
+### 
+
+<!--
 ### update_kernels
 (deprecated) List of kernel images to include in the update (OTA) package.
 If no list is provided, all built kernels are included. The names in the
@@ -3572,7 +5058,11 @@ package.
 **Current value (from the default):** `[]`
 
 From //build/images/args.gni:27
+-->
 
+### 
+
+<!--
 ### use_cast_runner_canary
 If true then the most recent canary version of the Cast Runner is used,
 otherwise the most recently validated version is used.
@@ -3580,14 +5070,22 @@ otherwise the most recently validated version is used.
 **Current value (from the default):** `false`
 
 From //src/chromium/build_args.gni:18
+-->
 
+### 
+
+<!--
 ### use_ccache
 Set to true to enable compiling with ccache
 
 **Current value (from the default):** `false`
 
 From //build/toolchain/ccache.gni:9
+-->
 
+### 
+
+<!--
 ### use_chromium_canary
 Set to use the most recent canary version of prebuilt Chromium components
 otherwise the most recently validated version is used.
@@ -3595,7 +5093,11 @@ otherwise the most recently validated version is used.
 **Current value (from the default):** `false`
 
 From //src/chromium/build_args.gni:14
+-->
 
+### 
+
+<!--
 ### use_cxx_relative_vtables
 Controls if we enable relative-vtables for C++ targets.
 TODO(fxbug.dev/45314): Set this to true in a followup one-line CL.
@@ -3603,7 +5105,11 @@ TODO(fxbug.dev/45314): Set this to true in a followup one-line CL.
 **Current value (from the default):** `true`
 
 From //build/config/clang/clang.gni:20
+-->
 
+### 
+
+<!--
 ### use_goma
 Set to true to enable distributed compilation using Goma.
 
@@ -3622,21 +5128,33 @@ From //out/not-default/args.gn:8
 **Overridden from the default:** `false`
 
 From //build/toolchain/goma.gni:11
+-->
 
+### 
+
+<!--
 ### use_legacy_virtcon
 Set to use legacy virtcon implementation.
 
 **Current value (from the default):** `true`
 
 From //src/bringup/bundles/BUILD.gn:7
+-->
 
+### 
+
+<!--
 ### use_lto
 Use link time optimization (LTO).
 
 **Current value (from the default):** `false`
 
 From //build/config/lto/config.gni:7
+-->
 
+### 
+
+<!--
 ### use_modern_input_injection
 Set this to true when configuring gn args to use the modern input injection
 protocol `fuchsia.input.injection.InputDeviceRegistry`. If not set, input-synthesis
@@ -3645,7 +5163,11 @@ defaults to connect to `fuchsia.ui.input.InputDeviceRegistry`.
 **Current value (from the default):** `false`
 
 From //src/lib/ui/input-synthesis/BUILD.gn:12
+-->
 
+### 
+
+<!--
 ### use_netstack3
 If true, replaces netstack with netstack3.
 
@@ -3655,7 +5177,11 @@ to true to avoid build failures. See that flag's documentation for details.
 **Current value (from the default):** `false`
 
 From //src/connectivity/network/BUILD.gn:10
+-->
 
+### 
+
+<!--
 ### use_null_vulkan_on_host
 TODO(liyl): Currently non-x64 platforms don't have Vulkan support,
 so we always use the null Vulkan implementation instead.
@@ -3670,7 +5196,11 @@ This argument will affect all vulkan_{executable/test} build targets.
 **Current value (from the default):** `false`
 
 From //src/lib/vulkan/build/config.gni:40
+-->
 
+### 
+
+<!--
 ### use_physboot
 **TODO(fxbug.dev/32414): This is a temporary switch that will be removed.**
 If true, use the new "physboot" booting path for the Zircon kernel.
@@ -3678,7 +5208,11 @@ If true, use the new "physboot" booting path for the Zircon kernel.
 **Current value (from the default):** `false`
 
 From //zircon/kernel/BUILD.gn:21
+-->
 
+### 
+
+<!--
 ### use_prebuilt_ffmpeg
 Use a prebuilt ffmpeg binary rather than building it locally.  See
 //src/media/lib/ffmpeg/README.md for details.  This is ignored when
@@ -3696,7 +5230,11 @@ git clone "sso://fuchsia.googlesource.com/third_party/ffmpeg" third_party/ffmpeg
 **Current value (from the default):** `true`
 
 From //src/media/lib/ffmpeg/BUILD.gn:39
+-->
 
+### 
+
+<!--
 ### use_swiftshader_vulkan_icd_on_host
 
 Global arguments for whether we use the SwiftShader Vulkan ICD on host
@@ -3709,14 +5247,22 @@ it only works when use_null_vulkan_on_host is set to false.
 **Current value (from the default):** `true`
 
 From //src/lib/vulkan/build/config.gni:49
+-->
 
+### 
+
+<!--
 ### use_thinlto
 Use ThinLTO variant of LTO if use_lto = true.
 
 **Current value (from the default):** `true`
 
 From //build/config/lto/config.gni:10
+-->
 
+### 
+
+<!--
 ### use_vbmeta
 If true, then a vbmeta image will be generated for provided ZBI
 and the paving script will pave vbmeta images to the target device.
@@ -3724,14 +5270,22 @@ and the paving script will pave vbmeta images to the target device.
 **Current value (from the default):** `false`
 
 From //build/images/vbmeta.gni:16
+-->
 
+### 
+
+<!--
 ### use_vboot
 Use vboot images
 
 **Current value (from the default):** `false`
 
 From //build/images/args.gni:10
+-->
 
+### 
+
+<!--
 ### using_fuchsia_sdk
 Only set in buildroots where targets configure themselves for use with the
 Fuchsia SDK
@@ -3739,46 +5293,74 @@ Fuchsia SDK
 **Current value (from the default):** `false`
 
 From //build/fuchsia/sdk.gni:8
+-->
 
+### 
+
+<!--
 ### vbmeta_a_partition
 
 **Current value (from the default):** `""`
 
 From //build/images/args.gni:78
+-->
 
+### 
+
+<!--
 ### vbmeta_b_partition
 
 **Current value (from the default):** `""`
 
 From //build/images/args.gni:79
+-->
 
+### 
+
+<!--
 ### vbmeta_r_partition
 
 **Current value (from the default):** `""`
 
 From //build/images/args.gni:80
+-->
 
+### 
+
+<!--
 ### vendor_linting
 Whether libraries under //vendor should be linted.
 
 **Current value (from the default):** `false`
 
 From //build/fidl/fidl_library.gni:13
+-->
 
+### 
+
+<!--
 ### virtcon_logo_path
 Path to file to use for logo
 
 **Current value (from the default):** `"//src/bringup/bin/virtcon2/data/fuchsia.riv"`
 
 From //src/bringup/bin/virtcon2/virtcon_args.gni:7
+-->
 
+### 
+
+<!--
 ### virtmagma_debug
 Enable verbose logging in virtmagma-related code
 
 **Current value (from the default):** `false`
 
 From //src/graphics/lib/magma/include/virtio/virtmagma_debug.gni:7
+-->
 
+### 
+
+<!--
 ### vm_tracing_level
 The level of detail for traces emitted by the VM system. Values greater than
 zero add increasing details at the cost of increased trace buffer use.
@@ -3789,7 +5371,11 @@ zero add increasing details at the cost of increased trace buffer use.
 **Current value (from the default):** `0`
 
 From //zircon/kernel/params.gni:63
+-->
 
+### 
+
+<!--
 ### vulkan_host_runtime_dir
 
 |vulkan_host_runtime_dir| is the path to Vulkan runtime libraries, which
@@ -3800,7 +5386,11 @@ and descriptor files required to load the libraries.
 **Current value (from the default):** `"//prebuilt/third_party/vulkan_runtime/linux-x64"`
 
 From //src/lib/vulkan/build/config.gni:23
+-->
 
+### 
+
+<!--
 ### vulkan_host_sdk_dir
 
 |vulkan_host_sdk_dir| is the path to Vulkan SDK, which contains Vulkan
@@ -3810,13 +5400,21 @@ headers and sources to Vulkan loader, layers and tools.
 **Current value (from the default):** `"//prebuilt/third_party/vulkansdk/linux/x86_64"`
 
 From //src/lib/vulkan/build/config.gni:16
+-->
 
+### 
+
+<!--
 ### vulkan_sdk
 
 **Current value (from the default):** `""`
 
 From //src/graphics/examples/vkproto/common/common.gni:45
+-->
 
+### 
+
+<!--
 ### wait_queue_depth_tracing_enabled
 Enables tracing of wait queue depths.  Used for post-processing analysis of
 how deep wait queues tend to be under various loads, as well as how
@@ -3825,7 +5423,11 @@ frequently the change depth.
 **Current value (from the default):** `false`
 
 From //zircon/kernel/params.gni:56
+-->
 
+### 
+
+<!--
 ### warn_on_sdk_changes
 Whether to only warn when an SDK has been modified.
 If false, any unacknowledged SDK change will cause a build failure.
@@ -3833,49 +5435,77 @@ If false, any unacknowledged SDK change will cause a build failure.
 **Current value (from the default):** `false`
 
 From //build/sdk/config.gni:11
+-->
 
+### 
+
+<!--
 ### weave_build_legacy_wdm
 Tells openweave to support legacy WDM mode.
 
 **Current value (from the default):** `false`
 
 From [//third_party/openweave-core/config.gni:29](https://fuchsia.googlesource.com/third_party/openweave-core/+/3203ab69f65bbc9a49e75c64c08b929e07cd02f4/config.gni#29)
+-->
 
+### 
+
+<!--
 ### weave_build_warm
 Tells openweave to build WARM libraries.
 
 **Current value (from the default):** `true`
 
 From [//third_party/openweave-core/config.gni:26](https://fuchsia.googlesource.com/third_party/openweave-core/+/3203ab69f65bbc9a49e75c64c08b929e07cd02f4/config.gni#26)
+-->
 
+### 
+
+<!--
 ### weave_system_config_use_sockets
 Tells openweave components to use bsd-like sockets.
 
 **Current value (from the default):** `true`
 
 From [//third_party/openweave-core/config.gni:7](https://fuchsia.googlesource.com/third_party/openweave-core/+/3203ab69f65bbc9a49e75c64c08b929e07cd02f4/config.gni#7)
+-->
 
+### 
+
+<!--
 ### weave_with_nlfaultinjection
 Tells openweave components to support fault injection.
 
 **Current value (from the default):** `false`
 
 From [//third_party/openweave-core/config.gni:20](https://fuchsia.googlesource.com/third_party/openweave-core/+/3203ab69f65bbc9a49e75c64c08b929e07cd02f4/config.gni#20)
+-->
 
+### 
+
+<!--
 ### weave_with_verhoeff
 Tells openweave to support Verhoeff checksum.
 
 **Current value (from the default):** `true`
 
 From [//third_party/openweave-core/config.gni:23](https://fuchsia.googlesource.com/third_party/openweave-core/+/3203ab69f65bbc9a49e75c64c08b929e07cd02f4/config.gni#23)
+-->
 
+### 
+
+<!--
 ### with_live_usb
 Whether or not to include the live_usb component in the build.
 
 **Current value (from the default):** `false`
 
 From //src/sys/live_usb/BUILD.gn:15
+-->
 
+### 
+
+<!--
 ### wlancfg_config_type
 Selects the wlan configuration type to use. Choices:
   "client" - client mode
@@ -3885,7 +5515,11 @@ Selects the wlan configuration type to use. Choices:
 **Current value (from the default):** `"client"`
 
 From //src/connectivity/wlan/wlancfg/BUILD.gn:16
+-->
 
+### 
+
+<!--
 ### zbi_compression
 Compression setting for ZBI "storage" items.
 This can be "zstd", optionally followed by ".LEVEL"
@@ -3894,14 +5528,22 @@ where `LEVEL` can be an integer or "max".
 **Current value (from the default):** `"zstd"`
 
 From //build/zbi/zbi.gni:12
+-->
 
+### 
+
+<!--
 ### zedboot_devmgr_config
 List of arguments to populate /boot/config/devmgr in the Zedboot image.
 
 **Current value (from the default):** `[]`
 
 From //build/images/zedboot/zedboot_args.gni:7
+-->
 
+### 
+
+<!--
 ### zircon_a_partition
 Arguments to `fx flash` script (along with any `firmware_prebuilts` which
 specify a partition).
@@ -3916,32 +5558,52 @@ doesn't require the FVM or SSH keys.
 **Current value (from the default):** `""`
 
 From //build/images/args.gni:75
+-->
 
+### 
+
+<!--
 ### zircon_asserts
 
 **Current value (from the default):** `false`
 
 From //build/config/fuchsia/BUILD.gn:168
+-->
 
+### 
+
+<!--
 ### zircon_b_partition
 
 **Current value (from the default):** `""`
 
 From //build/images/args.gni:76
+-->
 
+### 
+
+<!--
 ### zircon_build_root
 
 **Current value (from the default):** `"//zircon"`
 
 From //src/graphics/lib/magma/gnbuild/magma.gni:18
+-->
 
+### 
+
+<!--
 ### zircon_compdb_filter
 Compilation database filter. Gets passed to --export-compile-commands=<filter>.
 
 **Current value (from the default):** `"default"`
 
 From //build/zircon/build_args.gni:16
+-->
 
+### 
+
+<!--
 ### zircon_kernel_disable_asserts
 Forcibly disable all assertions for the Zircon kernel. If this is set, the
 default is to use the value of zx_assert_level to control assertions when
@@ -3950,7 +5612,11 @@ building the kernel.
 **Current value (from the default):** `false`
 
 From //build/zircon/build_args.gni:9
+-->
 
+### 
+
+<!--
 ### zircon_optimize
 Zircon optimization level. Same acceptable values as `optimize`.
 Note that this will be ignored, in favor of the global `optimize` variable
@@ -3959,13 +5625,21 @@ if the latter is one of: "none", "sanitizer", "profile" or "size".
 **Current value (from the default):** `"default"`
 
 From //build/config/zircon/levels.gni:18
+-->
 
+### 
+
+<!--
 ### zircon_r_partition
 
 **Current value (from the default):** `""`
 
 From //build/images/args.gni:77
+-->
 
+### 
+
+<!--
 ### zircon_toolchain
 *This should never be set as a build argument.*
 It exists only to be set in `toolchain_args`.
@@ -3984,7 +5658,11 @@ This allows testing for a Zircon-specific toolchain with:
 **Current value (from the default):** `false`
 
 From //build/config/BUILDCONFIG.gn:153
+-->
 
+### 
+
+<!--
 ### zircon_tracelog
 Where to emit a tracelog from Zircon's GN run. No trace will be produced if
 given the empty string. Path can be source-absolute or system-absolute.
@@ -3992,14 +5670,22 @@ given the empty string. Path can be source-absolute or system-absolute.
 **Current value (from the default):** `""`
 
 From //build/zircon/build_args.gni:13
+-->
 
+### 
+
+<!--
 ### zvb_partition_name
 Partition name from where image will be verified
 
 **Current value (from the default):** `"zircon"`
 
 From //build/images/vbmeta.gni:38
+-->
 
+### 
+
+<!--
 ### zx_assert_level
 Controls which asserts are enabled.
 
@@ -4014,14 +5700,22 @@ Controls which asserts are enabled.
 From //build/config/zircon/levels.gni:13
 
 ## `target_cpu = "arm64"`
+-->
 
+### 
+
+<!--
 ### amlogic_decoder_firmware_path
 Path to the amlogic decoder firmware file. Overrides the default in the build.
 
 **Current value (from the default):** `""`
 
 From //src/media/drivers/amlogic_decoder/BUILD.gn:12
+-->
 
+### 
+
+<!--
 ### arm_float_abi
 The ARM floating point mode. This is either the string "hard", "soft", or
 "softfp". An empty string means to use the default one for the
@@ -4030,14 +5724,22 @@ arm_version.
 **Current value (from the default):** `""`
 
 From //build/config/arm.gni:20
+-->
 
+### 
+
+<!--
 ### arm_optionally_use_neon
 Whether to enable optional NEON code paths.
 
 **Current value (from the default):** `false`
 
 From //build/config/arm.gni:31
+-->
 
+### 
+
+<!--
 ### arm_tune
 The ARM variant-specific tuning mode. This will be a string like "armv6"
 or "cortex-a15". An empty string means to use the default for the
@@ -4046,14 +5748,22 @@ arm_version.
 **Current value (from the default):** `""`
 
 From //build/config/arm.gni:25
+-->
 
+### 
+
+<!--
 ### arm_use_neon
 Whether to use the neon FPU instruction set or not.
 
 **Current value (from the default):** `true`
 
 From //build/config/arm.gni:28
+-->
 
+### 
+
+<!--
 ### arm_version
 
 **Current value (from the default):** `8`
