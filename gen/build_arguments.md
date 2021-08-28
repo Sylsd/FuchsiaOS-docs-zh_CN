@@ -206,7 +206,7 @@ From //build/security.gni:118
 
 **当前值（默认值）：** `true`
 
-参见  //build/security.gni:118
+参见 //build/security.gni:118
 
 <!--
 ### avb_algorithm
@@ -223,7 +223,18 @@ AVB algorithm type.Supported options:
 From //build/images/vbmeta.gni:35
 -->
 
-### 
+### avb_algorithm
+AVB 算法 type.Supported 可选项：
+  SHA256_RSA2048
+  SHA256_RSA4096
+  SHA256_RSA8192
+  SHA512_RSA2048
+  SHA512_RSA4096
+  SHA512_RSA8192
+
+**当前值（默认值）：** `"SHA512_RSA4096"`
+
+参见 //build/images/vbmeta.gni:35
 
 <!--
 ### avb_atx_metadata
@@ -234,7 +245,12 @@ AVB metadata which will be used to validate public key
 From //build/images/vbmeta.gni:26
 -->
 
-### 
+### avb_atx_metadata
+AVB 用以验证公钥的元信息
+
+**当前值（默认值）：** `""`
+
+参见 //build/images/vbmeta.gni:26
 
 <!--
 ### avb_key
@@ -245,7 +261,12 @@ a key which will be used to sign VBMETA and images for AVB
 From //build/images/vbmeta.gni:23
 -->
 
-### 
+### avb_key
+一个 AVB 用来给 VBMETA 和图片签名的密钥
+
+**当前值（默认值）：** `""`
+
+参见 //build/images/vbmeta.gni:23
 
 <!--
 ### base_driver_package_labels
@@ -270,7 +291,24 @@ From //products/bringup.gni:51
 From //BUILD.gn:24
 -->
 
-### 
+### base_driver_package_labels
+如果你向此变量添加了 fuchsia_driver_package 标签，则此包下的所有驱动对于 Driver Manager 都是可见的。 这些包标签应该是在 'base' 包集合中的（参见 'base_package_labels' 以了解更多信息）。
+
+**当`target_cpu = "arm64"`时默认值:** `[]`
+
+参见 //products/bringup.gni:51
+
+**覆盖默认值:** `[]`
+
+参见 //BUILD.gn:24
+
+**当`target_cpu = "x64"`时默认值:** `[]`
+
+参见 //products/bringup.gni:51
+
+**覆盖默认值:** `[]`
+
+参见 //BUILD.gn:24
 
 <!--
 ### base_package_labels
@@ -297,7 +335,24 @@ From //out/not-default/args.gn:3
 From //BUILD.gn:31
 -->
 
-### 
+### base_package_labels
+如果你向此变量添加软件包标签，则软件包会被包含在 'base' 软件包集合中，也就是说，此软件包集合会作为 OTA 的一部分。这些软件包会作为不可分割的一部分，在 OTA 过程中进行升级，同时这些软件包是不可变的，也是一个产品的 TCB（Trusted Computing Base）的超集。 系统也永远不会移除这些软件包。
+
+**当`target_cpu = "arm64"`时的默认值:** `["//bundles:kitchen_sink"]`
+
+参见 //out/not-default/args.gn:3
+
+**覆盖默认值:** `[]`
+
+参见 //BUILD.gn:31
+
+**当`target_cpu = "x64"`时的默认值:** `["//bundles:kitchen_sink"]`
+
+参见 //out/not-default/args.gn:3
+
+**覆盖默认值:** `[]`
+
+参见 //BUILD.gn:31
 
 <!--
 ### basic_env_names
@@ -308,7 +363,13 @@ The list of environment names to include in "basic_envs".
 From //build/testing/environments.gni:14
 -->
 
-### 
+### basic_env_names
+包含在"basic_envs"中的环境变量名称的列表。
+
+**当前值（默认值）:** `["emu"]`
+
+参见 //build/testing/environments.gni:14
+
 
 <!--
 ### blob_layout_format
@@ -319,7 +380,12 @@ The format blobfs should store blobs in.
 From //build/images/args.gni:106
 -->
 
-### 
+### blob_layout_format
+blobfs 用以存放 blobs 的格式。
+
+**当前值（默认值）：** `"compact"`
+
+参见 //build/images/args.gni:106
 
 <!--
 ### blobfs_board_maximum_bytes
@@ -337,7 +403,14 @@ reserve few blocks required for its operations.
 From //build/images/fvm.gni:84
 -->
 
-### 
+### blobfs_board_maximum_bytes
+这是对 inodes 和数据预留空间的补充，fs 需要额外的空间用来管理一些内部数据结构。所以该空间需要计算需要给 inode 和数据预留的空间总和。
+maximum_bytes 提供了一个预留总字节数的上限，用以存储 inode、数据字节和其他内部 fs 元信息。
+如果将参数值设为空字符串，则不设定上限。文件系统一般会为其操作预留一些 block。
+
+**当前值（默认值）：** `""`
+
+参见 //build/images/fvm.gni:84
 
 <!--
 ### blobfs_board_minimum_data_bytes
@@ -352,7 +425,13 @@ required for the filesystem.
 From //build/images/fvm.gni:71
 -->
 
-### 
+### blobfs_board_minimum_data_bytes
+为 fs 中的数据所预留的字节数。这是对 inode预留空间（如果有）的补充。 数据字节组成了 fs “可用的”空间。
+如果将参数值设为空字符串，则不会在文件系统最小需求的基础上增加额外的预留空间。
+
+**当前值（默认值）：** `""`
+
+参见 //build/images/fvm.gni:71
 
 <!--
 ### blobfs_board_minimum_inodes
@@ -365,7 +444,14 @@ required for the filesystem.
 From //build/images/fvm.gni:61
 -->
 
-### 
+### blobfs_board_minimum_inodes
+minimum_inodes 是为 fs 所预留的 inode 数量。
+
+如果将参数值设为空字符串，，则不会在文件系统最小需求的基础上增加额外的预留空间。
+
+**当前值（默认值）：** `""`
+
+参见 //build/images/fvm.gni:61
 
 <!--
 ### blobfs_enable_streaming_writes
@@ -378,7 +464,13 @@ only on specific configurations.
 From //src/storage/blobfs/BUILD.gn:18
 -->
 
-### 
+### blobfs_enable_streaming_writes
+将此参数设为 true，用来配置 gn 的参数以启用 blobfs 流写入功能。
+这是一个编译器参数，用来在特定的配置下启用 blobfs 流写入功能。
+
+**当前值（默认值）：** `"false"`
+
+参见 //src/storage/blobfs/BUILD.gn:18
 
 <!--
 ### blobfs_maximum_runtime_bytes
@@ -393,7 +485,14 @@ Pass the empty string for no limit.
 From //src/storage/fshost/BUILD.gn:16
 -->
 
-### 
+### blobfs_maximum_runtime_bytes
+blobfs_maximum_runtime_bytes 指定了设备分区大小的上限。如果 FVM 中有额外的分片可用，那么分区也可以按需增长。此意在限制避免 blobfs 分区从其他用户那里占用过多存储空间。
+
+如果将参数值设为空字符串，则没有限制。
+
+**当前值（默认值）：** `""`
+
+参见 //src/storage/fshost/BUILD.gn:16
 
 <!--
 ### blobfs_page_in_metrics_recording
@@ -407,7 +506,13 @@ to accommodate the large number of metrics entries.
 From //src/storage/blobfs/BUILD.gn:13
 -->
 
-### 
+### blobfs_page_in_metrics_recording
+将此参数设为 true，用来配置 gn 的参数以启用 blobfs 的 page-in 指标记录功能。
+这也会将 blobfs 的检查 VMO 大小增加到 2 MiB，以容纳大量的指标实例。
+
+**当前值（默认值）：** `"false"`
+
+参见 //src/storage/blobfs/BUILD.gn:13
 
 <!--
 ### blobfs_product_maximum_bytes
@@ -417,7 +522,11 @@ From //src/storage/blobfs/BUILD.gn:13
 From //build/images/fvm.gni:85
 -->
 
-### 
+### blobfs_product_maximum_bytes
+
+**当前值（默认值）：** `""`
+
+参见 //build/images/fvm.gni:85
 
 <!--
 ### blobfs_product_minimum_data_bytes
@@ -427,7 +536,11 @@ From //build/images/fvm.gni:85
 From //build/images/fvm.gni:72
 -->
 
-### 
+### blobfs_product_minimum_data_bytes
+
+**当前值（默认值）：** `""`
+
+参见 //build/images/fvm.gni:72
 
 <!--
 ### blobfs_product_minimum_inodes
@@ -437,7 +550,11 @@ From //build/images/fvm.gni:72
 From //build/images/fvm.gni:62
 -->
 
-### 
+### blobfs_product_minimum_inodes
+
+**当前值（默认值）：** `""`
+
+参见 //build/images/fvm.gni:62
 
 <!--
 ### board_bootfs_labels
@@ -460,7 +577,25 @@ From //boards/x64.gni:19
 From //build/board.gni:22
 -->
 
-### 
+### board_bootfs_labels
+此选项指定了包含在 ZBI 中的二进制标签列表。
+
+
+**当`target_cpu = "arm64"`时的默认值：** `["//src/connectivity/ethernet/drivers/virtio:virtio_ethernet", "//src/devices/block/drivers/virtio:virtio_block", "//src/devices/block/drivers/virtio:virtio_scsi", "//src/devices/misc/drivers/virtio-rng:virtio_rng", "//src/devices/misc/drivers/virtio-socket:virtio_socket", "//src/devices/serial/drivers/virtio-console:virtio_console", "//src/graphics/drivers/misc:goldfish_driver_modules", "//src/graphics/display/drivers/goldfish-display", "//src/graphics/drivers/virtio:virtio_gpu", "//src/ui/input/drivers/virtio:virtio_input", "//src/devices/block/drivers/ahci", "//src/devices/board/drivers/qemu-arm64", "//src/devices/rtc/drivers/pl031-rtc", "//src/graphics/display/drivers/fake:fake-display", "//src/devices/bus/drivers/pci:bus-pci", "//src/devices/bus/drivers/pci:bus-pci.proxy", "//src/devices/usb/drivers/xhci-rewrite:xhci", "//src/power/power-manager:base_config", "//src/security/policy/zxcrypt:null"]`
+
+参见 //boards/arm64.gni:19
+
+**覆盖默认值：** `[]`
+
+参见 //build/board.gni:22
+
+**当`target_cpu = "x86"`时的默认值：** `["//src/connectivity/ethernet/drivers/realtek-8111", "//src/devices/block/drivers/ahci", "//src/devices/block/drivers/mbr", "//src/devices/block/drivers/nvme", "//src/devices/block/drivers/pci-sdhci", "//src/devices/block/drivers/sdhci", "//src/devices/board/drivers/x86:platform-bus-x86", "//src/devices/bus/drivers/pci:bus-pci", "//src/devices/bus/drivers/pci:bus-pci.proxy", "//src/devices/i2c/drivers/intel-i2c", "//src/devices/rtc/drivers/intel-rtc", "//src/devices/serial/drivers/uart16550", "//src/devices/usb/drivers/xhci-rewrite:xhci", "//src/graphics/display/drivers/intel-i915", "//src/graphics/display/drivers/simple:simple.amd-kaveri", "//src/graphics/display/drivers/simple:simple.nv", "//src/media/audio/drivers/codecs/alc5514", "//src/media/audio/drivers/codecs/alc5663", "//src/media/audio/drivers/codecs/max98927", "//src/media/audio/drivers/intel-hda/codecs/hdmi:hdmi-audio-codec", "//src/media/audio/drivers/intel-hda/codecs/realtek:realtek-audio-codec", "//src/media/audio/drivers/intel-hda/controller:intel-hda", "//src/ui/input/drivers/i2c-hid", "//src/ui/input/drivers/pc-ps2", "//zircon/third_party/dev/ethernet/e1000", "//src/connectivity/ethernet/drivers/virtio:virtio_ethernet", "//src/devices/block/drivers/virtio:virtio_block", "//src/devices/block/drivers/virtio:virtio_scsi", "//src/devices/misc/drivers/virtio-rng:virtio_rng", "//src/devices/misc/drivers/virtio-socket:virtio_socket", "//src/devices/serial/drivers/virtio-console:virtio_console", "//src/graphics/drivers/misc:goldfish_driver_modules", "//src/graphics/display/drivers/goldfish-display", "//src/graphics/drivers/virtio:virtio_gpu", "//src/ui/input/drivers/virtio:virtio_input", "//src/graphics/display/drivers/simple:simple.bochs", "//src/graphics/display/drivers/simple:simple.intel", "//src/graphics/display/drivers/simple:simple.vmware", "//src/media/audio/drivers/intel-hda/codecs/qemu:qemu-audio-codec", "//src/devices/bin/acpidump", "//src/devices/pci/bin:bootfs", "//src/media/audio/bin/ihda", "//src/power/power-manager:base_config", "//src/security/policy/zxcrypt:null", "//boards/kernel_cmdline:serial-legacy", "//src/storage/fshost:gpt_all"]`
+
+参见 //boards/x64.gni:19
+
+**覆盖默认值：** `[]`
+
+参见 //build/board.gni:22
 
 <!--
 ### board_driver_package_labels
@@ -472,7 +607,12 @@ by the board definition rather than the product definition.
 From //build/board.gni:11
 -->
 
-### 
+### board_driver_package_labels
+一组将被包含在'base'软件包集合中的驱动软件包标签。被用于板型定义，而非产品定义。
+
+**当前值（默认值）：** `[]`
+
+参见 //build/board.gni:11
 
 <!--
 ### board_extra_vbmeta_images
@@ -484,7 +624,12 @@ struct.
 From //build/images/vbmeta.gni:42
 -->
 
-### 
+### board_extra_vbmeta_images
+此参数定义了将要被绑定到顶级 vbmeta 结构中的板型级别的额外 vbmeta 镜像文件。
+
+**当前值（默认值）：** `[]`
+
+参见 //build/images/vbmeta.gni:42
 
 <!--
 ### board_has_libvulkan_arm_mali
@@ -495,7 +640,12 @@ Board files can set this to true if they have a package with a mali libvulkan VC
 From //src/graphics/lib/magma/gnbuild/magma.gni:55
 -->
 
-### 
+### board_has_libvulkan_arm_mali
+如果板型文件软件包有包含 mali libvulkan VCD的，那么可以设置此参数为 true。
+
+**当前值（默认值）：** `false`
+
+参见 //src/graphics/lib/magma/gnbuild/magma.gni:55
 
 <!--
 ### board_name
@@ -518,7 +668,24 @@ From //boards/x64.gni:8
 From //build/board.gni:7
 -->
 
-### 
+### board_name
+该参数指定了用于 paving 和 amber 更新的板型名称。
+
+**当`target_cpu = "arm64"`默认值为：** `"qemu-arm64"`
+
+参见 //boards/arm64.gni:9
+
+**覆盖默认值：** `""`
+
+参见 //build/board.gni:7
+
+**当`target_cpu = "x64"`默认值为：** `"x64"`
+
+参见 //boards/x64.gni:8
+
+**覆盖默认值：** `""`
+
+参见 //build/board.gni:7
 
 <!--
 ### board_package_labels
@@ -542,7 +709,25 @@ From //boards/common/x64-common.gni:67
 From //build/board.gni:15
 -->
 
-### 
+### board_package_labels
+该参数指定了一组将被包含在'base'软件包集合中的软件包标签。被用于板型定义，而非产品定义。
+
+**当`target_cpu = "arm64"`默认值为：** `["//src/power/thermd", "//src/power/thermd:config", "//garnet/packages/prod:drivers-support"]`
+
+参见 //boards/arm64.gni:30
+
+**覆盖默认值：** `[]`
+
+参见 //build/board.gni:15
+
+**当`target_cpu = "x64"`默认值为：** `["//src/power/thermd", "//src/power/thermd:config", "//garnet/packages/prod:drivers-support", "//src/hwinfo:default_board_config"]`
+
+参见 //boards/common/x64-common.gni:67
+
+**覆盖默认值：** `""`
+
+参见 //build/board.gni:15
+
 
 <!--
 ### board_recovery_bootfs_labels
@@ -565,7 +750,24 @@ From //boards/x64.gni:13
 From //build/board.gni:33
 -->
 
-### 
+### board_recovery_bootfs_labels
+该参数指定了一组将被包含在 recovery ZBI 中的二进制标签。
+
+**当`target_cpu = "arm64"`默认值为：** `"qemu-arm64"`
+
+参见 //boards/arm64.gni:23
+
+**覆盖默认值：** `["//src/connectivity/ethernet/drivers/virtio:virtio_ethernet", "//src/devices/block/drivers/virtio:virtio_block", "//src/devices/block/drivers/virtio:virtio_scsi", "//src/devices/misc/drivers/virtio-rng:virtio_rng", "//src/devices/misc/drivers/virtio-socket:virtio_socket", "//src/devices/serial/drivers/virtio-console:virtio_console", "//src/graphics/drivers/misc:goldfish_driver_modules", "//src/graphics/display/drivers/goldfish-display", "//src/graphics/drivers/virtio:virtio_gpu", "//src/ui/input/drivers/virtio:virtio_input", "//src/devices/block/drivers/ahci", "//src/devices/board/drivers/qemu-arm64", "//src/devices/rtc/drivers/pl031-rtc", "//src/graphics/display/drivers/fake:fake-display", "//src/devices/bus/drivers/pci:bus-pci", "//src/devices/bus/drivers/pci:bus-pci.proxy", "//src/devices/usb/drivers/xhci-rewrite:xhci", "//src/power/power-manager:base_config", "//src/security/policy/zxcrypt:null"]`
+
+参见 //build/board.gni:33
+
+**当`target_cpu = "x64"`默认值为：** `"x64"`
+
+参见 //boards/x64.gni:13
+
+**覆盖默认值：** `["//src/connectivity/ethernet/drivers/realtek-8111", "//src/devices/block/drivers/ahci", "//src/devices/block/drivers/mbr", "//src/devices/block/drivers/nvme", "//src/devices/block/drivers/pci-sdhci", "//src/devices/block/drivers/sdhci", "//src/devices/board/drivers/x86:platform-bus-x86", "//src/devices/bus/drivers/pci:bus-pci", "//src/devices/bus/drivers/pci:bus-pci.proxy", "//src/devices/i2c/drivers/intel-i2c", "//src/devices/rtc/drivers/intel-rtc", "//src/devices/serial/drivers/uart16550", "//src/devices/usb/drivers/xhci-rewrite:xhci", "//src/graphics/display/drivers/intel-i915", "//src/graphics/display/drivers/simple:simple.amd-kaveri", "//src/graphics/display/drivers/simple:simple.nv", "//src/media/audio/drivers/codecs/alc5514", "//src/media/audio/drivers/codecs/alc5663", "//src/media/audio/drivers/codecs/max98927", "//src/media/audio/drivers/intel-hda/codecs/hdmi:hdmi-audio-codec", "//src/media/audio/drivers/intel-hda/codecs/realtek:realtek-audio-codec", "//src/media/audio/drivers/intel-hda/controller:intel-hda", "//src/ui/input/drivers/i2c-hid", "//src/ui/input/drivers/pc-ps2", "//zircon/third_party/dev/ethernet/e1000", "//src/connectivity/ethernet/drivers/virtio:virtio_ethernet", "//src/devices/block/drivers/virtio:virtio_block", "//src/devices/block/drivers/virtio:virtio_scsi", "//src/devices/misc/drivers/virtio-rng:virtio_rng", "//src/devices/misc/drivers/virtio-socket:virtio_socket", "//src/devices/serial/drivers/virtio-console:virtio_console", "//src/graphics/drivers/misc:goldfish_driver_modules", "//src/graphics/display/drivers/goldfish-display", "//src/graphics/drivers/virtio:virtio_gpu", "//src/ui/input/drivers/virtio:virtio_input", "//src/graphics/display/drivers/simple:simple.bochs", "//src/graphics/display/drivers/simple:simple.intel", "//src/graphics/display/drivers/simple:simple.vmware", "//src/media/audio/drivers/intel-hda/codecs/qemu:qemu-audio-codec", "//src/devices/bin/acpidump", "//src/devices/pci/bin:bootfs", "//src/media/audio/bin/ihda", "//src/power/power-manager:base_config", "//src/security/policy/zxcrypt:null", "//boards/kernel_cmdline:serial-legacy"]`
+
+参见 //build/board.gni:33
 
 <!--
 ### board_recovery_package_labels
@@ -577,7 +779,12 @@ board definition rather than the product definition.
 From //build/board.gni:19
 -->
 
-### 
+### board_recovery_package_labels
+该参数指定了一组将被包含在 recovery 软件包集合中的软件包标签。被用于板型定义，而非产品定义。
+
+**当前值（默认值）：** `[]`
+
+参见 //build/board.gni:19
 
 <!--
 ### board_system_image_deps
@@ -600,7 +807,25 @@ From //boards/common/x64-common.gni:62
 From //build/board.gni:36
 -->
 
-### 
+### board_system_image_deps
+该参数指定了一组将被包含在 system_image 软件包中的二进制标签。
+
+
+**当`target_cpu = "arm64"`默认值为：** `"qemu-arm64"`
+
+参见 //boards/arm64.gni:25
+
+**覆盖默认值：** `["//garnet/packages/prod:drivers-system", "//src/media/audio/bundles:virtual_audio_driver"]`
+
+参见 //build/board.gni:36
+
+**当`target_cpu = "x64"`默认值为：** `"x64"`
+
+参见 //boards/common/x64-common.gni:62
+
+**覆盖默认值：** `["//garnet/packages/prod:drivers-system", "//src/media/audio/bundles:virtual_audio_driver"]`
+
+参见 //build/board.gni:36
 
 <!--
 ### board_tools
@@ -619,7 +844,17 @@ any kind of stable contract for users of the archive.
 From //build/images/args.gni:136
 -->
 
-### 
+### board_tools
+该参数指定了一组板型专属工具的路径，这些工具将被包含在构建的输出当中。
+
+多数开发工具可以在开发中直接使用,并不需要包含到该参数当中. 此参数仅对哪些需要跟构建文件一起分发的工具有效,比如 SoC 恢复模式中要用到的刷写工具.
+
+如果工具使用此种方式所引入,则仅支持最大努力交付,不对存档用户做出稳定承诺.
+
+
+**当前值（默认值）：** `[]`
+
+参见  //build/images/args.gni:136
 
 <!--
 ### board_zedboot_bootfs_labels
@@ -642,7 +877,25 @@ From //boards/x64.gni:14
 From //build/board.gni:30
 -->
 
-### 
+### board_zedboot_bootfs_labels
+一组将被包含在 zedboot ZBI 中的二进制标签
+
+
+**当`target_cpu = "arm64"`默认值为：** `["//src/connectivity/ethernet/drivers/virtio:virtio_ethernet", "//src/devices/block/drivers/virtio:virtio_block", "//src/devices/block/drivers/virtio:virtio_scsi", "//src/devices/misc/drivers/virtio-rng:virtio_rng", "//src/devices/misc/drivers/virtio-socket:virtio_socket", "//src/devices/serial/drivers/virtio-console:virtio_console", "//src/graphics/drivers/misc:goldfish_driver_modules", "//src/graphics/display/drivers/goldfish-display", "//src/graphics/drivers/virtio:virtio_gpu", "//src/ui/input/drivers/virtio:virtio_input", "//src/devices/block/drivers/ahci", "//src/devices/board/drivers/qemu-arm64", "//src/devices/rtc/drivers/pl031-rtc", "//src/graphics/display/drivers/fake:fake-display", "//src/devices/bus/drivers/pci:bus-pci", "//src/devices/bus/drivers/pci:bus-pci.proxy", "//src/devices/usb/drivers/xhci-rewrite:xhci", "//src/power/power-manager:base_config", "//src/security/policy/zxcrypt:null"]`
+
+参见 //boards/arm64.gni:21
+
+**覆盖默认值：** `[]`
+
+参见 //build/board.gni:30
+
+**当`target_cpu = "x64"`默认值为：** `["//src/connectivity/ethernet/drivers/realtek-8111", "//src/devices/block/drivers/ahci", "//src/devices/block/drivers/mbr", "//src/devices/block/drivers/nvme", "//src/devices/block/drivers/pci-sdhci", "//src/devices/block/drivers/sdhci", "//src/devices/board/drivers/x86:platform-bus-x86", "//src/devices/bus/drivers/pci:bus-pci", "//src/devices/bus/drivers/pci:bus-pci.proxy", "//src/devices/i2c/drivers/intel-i2c", "//src/devices/rtc/drivers/intel-rtc", "//src/devices/serial/drivers/uart16550", "//src/devices/usb/drivers/xhci-rewrite:xhci", "//src/graphics/display/drivers/intel-i915", "//src/graphics/display/drivers/simple:simple.amd-kaveri", "//src/graphics/display/drivers/simple:simple.nv", "//src/media/audio/drivers/codecs/alc5514", "//src/media/audio/drivers/codecs/alc5663", "//src/media/audio/drivers/codecs/max98927", "//src/media/audio/drivers/intel-hda/codecs/hdmi:hdmi-audio-codec", "//src/media/audio/drivers/intel-hda/codecs/realtek:realtek-audio-codec", "//src/media/audio/drivers/intel-hda/controller:intel-hda", "//src/ui/input/drivers/i2c-hid", "//src/ui/input/drivers/pc-ps2", "//zircon/third_party/dev/ethernet/e1000", "//src/connectivity/ethernet/drivers/virtio:virtio_ethernet", "//src/devices/block/drivers/virtio:virtio_block", "//src/devices/block/drivers/virtio:virtio_scsi", "//src/devices/misc/drivers/virtio-rng:virtio_rng", "//src/devices/misc/drivers/virtio-socket:virtio_socket", "//src/devices/serial/drivers/virtio-console:virtio_console", "//src/graphics/drivers/misc:goldfish_driver_modules", "//src/graphics/display/drivers/goldfish-display", "//src/graphics/drivers/virtio:virtio_gpu", "//src/ui/input/drivers/virtio:virtio_input", "//src/graphics/display/drivers/simple:simple.bochs", "//src/graphics/display/drivers/simple:simple.intel", "//src/graphics/display/drivers/simple:simple.vmware", "//src/media/audio/drivers/intel-hda/codecs/qemu:qemu-audio-codec", "//src/devices/bin/acpidump", "//src/devices/pci/bin:bootfs", "//src/media/audio/bin/ihda", "//src/power/power-manager:base_config", "//src/security/policy/zxcrypt:null", "//boards/kernel_cmdline:serial-legacy"]`
+
+参见 //boards/x64.gni:14
+
+**覆盖默认值：** `[]`
+
+参见 //build/board.gni:30
 
 <!--
 ### board_zedboot_cmdline_args
@@ -655,7 +908,12 @@ required by this board. See also zedboot_cmdline_args in
 From //build/board.gni:27
 -->
 
-### 
+### board_zedboot_cmdline_args
+一组内核命令行参数, 因为当前板型需要而被烧录进 zedboot 镜像. 关于 zedboot_cmdline_args  请参见 //build/images/zedboot/BUILD.gn
+
+**当前值（默认值）：** `[]`
+
+参见 //build/board.gni:27
 
 <!--
 ### bootfs_only
@@ -679,7 +937,24 @@ From //products/bringup.gni:5
 From //build/images/args.gni:14
 -->
 
-### 
+### bootfs_only
+将 "system image" 包放到 BOOTFS 内. 因此 原本运行时的 /system/... 内容将被替代为 /boot/... 
+
+**当`target_cpu = "arm64"`默认值为：** `true`
+
+参见 //products/bringup.gni:5
+
+**覆盖默认值：** `false`
+
+参见 //build/images/args.gni:14 
+
+**当`target_cpu = "x64"`默认值为：** `true`
+
+参见 //products/bringup.gni:5
+
+**覆盖默认值：** `false`
+
+参见 //build/images/args.gni:14
 
 <!--
 ### build_all_vp9_file_decoder_conformance_tests
@@ -689,7 +964,12 @@ From //build/images/args.gni:14
 From //src/media/codec/examples/BUILD.gn:10
 -->
 
-### 
+### build_all_vp9_file_decoder_conformance_tests
+
+
+**当前值（默认值）：** `false`
+
+参见 //src/media/codec/examples/BUILD.gn:10
 
 <!--
 ### build_id_format
@@ -703,7 +983,12 @@ default format is used.
 From //build/config/build_id.gni:10
 -->
 
-### 
+### build_id_format
+Fuchsia-target 代码的 ID 构建算法。 此参数不影响 host 和 guest 代码。 参数值用于联结器的 `--build-id=...` 。 如果留空， 则使用联结器默认格式。
+
+**当前值（默认值）：** `""`
+
+参见 //build/config/build_id.gni:10
 
 <!--
 ### build_info_board
@@ -726,7 +1011,25 @@ From //out/not-default/args.gn:4
 From //build/info/info.gni:12
 -->
 
-### 
+### build_info_board
+当前构建的版型配置信息
+
+
+**当`target_cpu = "arm64"`默认值为：** `"arm64"`
+
+参见 //out/not-default/args.gn:4
+
+**覆盖默认值：** `"qemu-arm64"`
+
+参见 //build/info/info.gni:12
+
+**当`target_cpu = "x64"`默认值为：** `"x64"`
+
+参见 //out/not-default/args.gn:4
+
+**覆盖默认值：** `"x64"`
+
+参见 //build/info/info.gni:12
 
 <!--
 ### build_info_product
@@ -749,7 +1052,25 @@ From //out/not-default/args.gn:5
 From //build/info/info.gni:9
 -->
 
-### 
+### build_info_product
+当前构建的产品配置信息
+
+
+**当`target_cpu = "arm64"`默认值为：** `"bringup"`
+
+参见 //out/not-default/args.gn:5
+
+**覆盖默认值：** `""`
+
+参见 //build/info/info.gni:9
+
+**当`target_cpu = "x64"`默认值为：** `"bringup"`
+
+参见 //out/not-default/args.gn:5
+
+**覆盖默认值：** `""`
+
+参见 //build/info/info.gni:9
 
 <!--
 ### build_info_version
@@ -761,7 +1082,13 @@ of the most recent update.
 From //build/info/info.gni:16
 -->
 
-### 
+### build_info_version
+当前构建的逻辑版本号. 留空则默认设为最近更新的时间戳.
+
+
+**当前值（默认值）：** `""`
+
+参见 //build/info/info.gni:16
 
 <!--
 ### build_libvulkan_arm_mali
@@ -772,7 +1099,14 @@ Targets that will be built as mali vulkan ICDS.
 From //src/graphics/lib/magma/gnbuild/magma.gni:43
 -->
 
-### 
+### build_libvulkan_arm_mali
+将被构建为 mali vulkan ICDS 的目标.
+
+
+**当前值（默认值）：** `[]`
+
+参见 //src/graphics/lib/magma/gnbuild/magma.gni:43
+
 
 <!--
 ### build_libvulkan_goldfish
@@ -782,7 +1116,12 @@ From //src/graphics/lib/magma/gnbuild/magma.gni:43
 From //src/graphics/lib/goldfish-vulkan/gnbuild/BUILD.gn:13
 -->
 
-### 
+### build_libvulkan_goldfish
+
+
+**当前值（默认值）：** `""`
+
+参见 //src/graphics/lib/goldfish-vulkan/gnbuild/BUILD.gn:13
 
 <!--
 ### build_libvulkan_img_rgx
@@ -793,7 +1132,13 @@ Targets that will be built as IMG vulkan ICDS.
 From //src/graphics/lib/magma/gnbuild/magma.gni:52
 -->
 
-### 
+### build_libvulkan_img_rgx
+将被构建为 IMG vulkan ICDS 的目标.
+
+
+**当前值（默认值）：** `[]`
+
+参见 //src/graphics/lib/magma/gnbuild/magma.gni:52
 
 <!--
 ### build_libvulkan_qcom_adreno
@@ -804,7 +1149,14 @@ Targets that will be built as qualcomm vulkan ICDS.
 From //src/graphics/lib/magma/gnbuild/magma.gni:49
 -->
 
-### 
+### build_libvulkan_qcom_adreno
+
+将被构建为高通 vulkan ICDS 的目标.
+
+
+**当前值（默认值）：** `[]`
+
+参见 //src/graphics/lib/magma/gnbuild/magma.gni:49
 
 <!--
 ### build_libvulkan_vsi_vip
@@ -815,7 +1167,13 @@ Targets that will be built as verisilicon vulkan ICDS.
 From //src/graphics/lib/magma/gnbuild/magma.gni:46
 -->
 
-### 
+### build_libvulkan_vsi_vip
+将被构建为 verisilicon vulkan ICDS 的目标.
+
+
+**当前值（默认值）：** `[]`
+
+参见 //src/graphics/lib/magma/gnbuild/magma.gni:46
 
 <!--
 ### build_sdk_archives
@@ -826,7 +1184,15 @@ Whether to build SDK tarballs.
 From //build/sdk/config.gni:7
 -->
 
-### 
+### build_sdk_archives
+
+是否构建 SDK tar包.
+
+
+**当前值（默认值）：** `false`
+
+参见 //build/sdk/config.gni:7
+
 
 <!--
 ### build_should_trace_actions
@@ -839,7 +1205,14 @@ An action that accesses undeclared inputs or outputs will fail the build.
 From //build/config/BUILDCONFIG.gn:566
 -->
 
-### 
+### build_should_trace_actions
+如果启用该选项,则所有文件系统活动的操作都会被跟踪并校验其声明的输入、输出以及依赖文件(如果声明了的话).
+如果该操作试图访问未声明过的 IO 设备, 构建会返回失败信息.
+
+
+**当前值（默认值）：** `false`
+
+参见  //build/config/BUILDCONFIG.gn:566
 
 <!--
 ### build_uefi_disk
@@ -850,7 +1223,13 @@ Generate a UEFI disk image
 From //build/images/args.gni:21
 -->
 
-### 
+### build_uefi_disk
+生成一份 UEFI 磁盘镜像文件.
+
+
+**当前值（默认值）：** `false`
+
+参见 //build/images/args.gni:21
 
 <!--
 ### cache_package_labels
@@ -878,7 +1257,25 @@ From //products/bringup.gni:55
 From //BUILD.gn:39
 -->
 
-### 
+### cache_package_labels
+当你向这个变量添加包标签时,对应的软件包就会被包含到 ‘cache’ 包集合中, 该集合包含的软件在 铺设和工厂流程完成后在硬盘上立即可用.这些软件不会随着 OTA 升级, 而是一次性更新. 系统会在面临存储压力或者其他策略指示时,移除这些缓存的软件.
+
+
+**当`target_cpu = "arm64"`默认值为：** `[]`
+
+参见 //products/bringup.gni:55
+
+**覆盖默认值：** `[]`
+
+参见 //BUILD.gn:39
+
+**当`target_cpu = "x64"`默认值为：** `[]`
+
+参见  //products/bringup.gni:55
+
+**覆盖默认值：** `[]`
+
+参见 //BUILD.gn:39
 
 <!--
 ### camera_debug
@@ -888,7 +1285,11 @@ From //BUILD.gn:39
 From //src/camera/debug.gni:6
 -->
 
-### 
+### camera_debug
+
+**当前值（默认值）：** `false`
+
+参见 //src/camera/debug.gni:6
 
 <!--
 ### camera_gym_configuration_cycle_time_ms
@@ -898,7 +1299,11 @@ From //src/camera/debug.gni:6
 From //src/camera/bin/camera-gym/BUILD.gn:11
 -->
 
-### 
+### camera_gym_configuration_cycle_time_ms
+
+**当前值（默认值）：** `10000`
+
+参见 //src/camera/bin/camera-gym/BUILD.gn:11
 
 <!--
 ### camera_gym_enable_root_presenter
@@ -908,7 +1313,11 @@ From //src/camera/bin/camera-gym/BUILD.gn:11
 From //src/camera/bin/camera-gym/BUILD.gn:12
 -->
 
-### 
+### camera_gym_enable_root_presenter
+
+**当前值（默认值）：** `false`
+
+参见 //src/camera/bin/camera-gym/BUILD.gn:12
 
 <!--
 ### carnelian_enable_vulkan_validation
@@ -919,7 +1328,13 @@ Include the vulkan validation layers in carnelian examples.
 From //src/lib/ui/carnelian/BUILD.gn:14
 -->
 
-### 
+### carnelian_enable_vulkan_validation
+在 carnelian 示例中包含 valkan 验证层.
+
+
+**当前值（默认值）：** `false`
+
+参见 //src/lib/ui/carnelian/BUILD.gn:14
 
 <!--
 ### check_production_eligibility
@@ -933,7 +1348,14 @@ non-production GN labels. Build will fail if such dependency is found.
 From //build/images/args.gni:100
 -->
 
-### 
+### check_production_eligibility
+是否执行针对产品构建资格的验证.
+设为 true 时, 将会对照 //build/validate:non_production_tag 检查 base_packages 和 cache_packages 包, 检查是否存在不可产品化发布的标签. 如果检查到相关依赖,则会返回失败信息.
+
+
+**当前值（默认值）：** `false`
+
+参见 //build/images/args.gni:100
 
 <!--
 ### check_repeatability
@@ -945,7 +1367,13 @@ and compare the outputs' contents for reproducibility.
 From //build/config/BUILDCONFIG.gn:570
 -->
 
-### 
+### check_repeatability
+如果启用该选项, 所有受影响的操作将执行两次(其中一次输出将被重命名) , 并对两次输出进行对比以验证其可重复性.
+
+
+**当前值（默认值）：** `false`
+
+参见 //build/config/BUILDCONFIG.gn:570
 
 <!--
 ### check_vtables_in_rodata
@@ -959,7 +1387,15 @@ This is primarily meant to be used by the clang canary builders.
 From //build/images/args.gni:61
 -->
 
-### 
+### check_vtables_in_rodata
+检查 binaries.json 中列出的所有 fuchsia 二进制包的虚表都存放于只读数据分区. 此检查将在所有构建结束后执行.
+
+此选项对于 clang canary 构建者更有帮助.
+
+
+**当前值（默认值）：** `false`
+
+参见 //build/images/args.gni:61
 
 <!--
 ### chromium_build_dir
@@ -973,7 +1409,8 @@ packages from CIPD will be used.
 From //src/chromium/build_args.gni:10
 -->
 
-### 
+### chromium_build_dir
+
 
 <!--
 ### clang_embed_bitcode
