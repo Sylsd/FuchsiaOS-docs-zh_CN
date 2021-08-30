@@ -1410,7 +1410,13 @@ From //src/chromium/build_args.gni:10
 -->
 
 ### chromium_build_dir
+此变量指定了全量 Chromium 构建输出目录, 比如 `/home/USER/chrome/src/out/fuchsia`, 'cast_runner', 'web_runner',
+以及 'web_engine' 都将由此而来. 如果不设置此变量, CIPD 预构建的包将被使用.
 
+
+**当前值（默认值）：** `""`
+
+参见 //src/chromium/build_args.gni:10
 
 <!--
 ### clang_embed_bitcode
@@ -1422,7 +1428,13 @@ primarily for external tools that use bitcode for analysis.
 From //build/config/clang/clang.gni:16
 -->
 
-### 
+### clang_embed_bitcode
+在 ELF 文件中, 以 .llvmbc 分区存在的内置 LLVM 字节码. 外置工具使用字节码进行分析时,此内容将被优先选用.
+
+
+**当前值（默认值）：** `false`
+
+参见 //build/config/clang/clang.gni:16
 
 <!--
 ### clang_lib_dir
@@ -1433,7 +1445,14 @@ Path to Clang lib directory.
 From //build/images/manifest.gni:13
 -->
 
-### 
+### clang_lib_dir
+
+Clang 库文件夹路径.
+
+
+**当前值（默认值）：** `"../../prebuilt/third_party/clang/linux-x64/lib"`
+
+参见 //build/images/manifest.gni:13
 
 <!--
 ### clang_ml_inliner
@@ -1445,7 +1464,13 @@ the option only takes effect when `optimize` is set to `"size"`.
 From //build/config/compiler.gni:43
 -->
 
-### 
+### clang_ml_inliner
+此变量控制 Clang 中的內联器是否压缩. 注意, 此参数仅在 `optimize` 设为 `"size"` 时有效.
+
+
+**当前值（默认值）：** `false`
+
+参见 //build/config/compiler.gni:43
 
 <!--
 ### clang_prefix
@@ -1457,7 +1482,12 @@ additionally consumed by the Go toolchain.
 From //build/config/clang/clang.gni:12
 -->
 
-### 
+### clang_prefix
+由预构建提供的默认的 clang 工具链. 此变量被 Go 工具链使用.
+
+**当前值（默认值）：** `"../../prebuilt/third_party/clang/linux-x64/bin"`
+
+参见 //build/config/clang/clang.gni:12
 
 <!--
 ### clang_tool_dir
@@ -1470,7 +1500,14 @@ This toolchain is expected to support both Fuchsia targets and the host.
 From //build/toolchain/zircon/clang.gni:11
 -->
 
-### 
+### clang_tool_dir
+Clang 二进制工具链(例如 "clang", "llvm-nm" 等等)所在目录. 如果设为“”, 则操作会基于 $clang_prefix 执行. 
+此工具链被期望同时用于 Fuchsia 构建目标和宿主机.
+
+
+**当前值（默认值）：** `""`
+
+参见 //build/toolchain/zircon/clang.gni:11
 
 <!--
 ### cobalt_environment
@@ -1484,7 +1521,15 @@ Selects the Cobalt environment to send data to. Choices:
 From //src/cobalt/bin/app/BUILD.gn:14
 -->
 
-### 
+### cobalt_environment
+选择 Cobalt 向之发送数据的环境. 可选项有:
+  "LOCAL" - 将日志输出到本地文件
+  "DEVEL" - 用于测试的非生产环境
+  "PROD" - 生产环境
+
+**当前值（默认值）：** `"PROD"`
+
+参见 //src/cobalt/bin/app/BUILD.gn:14
 
 <!--
 ### compress_blobs
@@ -1495,7 +1540,13 @@ Whether to compress the blobfs image.
 From //build/images/args.gni:103
 -->
 
-### 
+### compress_blobs
+是否压缩 blobfs 镜像文件.
+
+
+**当前值（默认值）：** `true`
+
+参见 //build/images/args.gni:103
 
 <!--
 ### concurrent_dart_jobs
@@ -1510,7 +1561,15 @@ errors we explicitly reduce the number of jobs.
 From //build/dart/BUILD.gn:17
 -->
 
-### 
+### concurrent_dart_jobs
+Dart 进程并行运行的最大数量.
+
+Dart 分析器在构建许多并行任务(比如使用 goma)时,使用大量内存,进而造成一些问题. 为了避免内存溢出错误, 我们可以直接减少任务数量.
+
+
+**当前值（默认值）：** `32`
+
+参见 //build/dart/BUILD.gn:17
 
 <!--
 ### config_have_heap
@@ -1521,7 +1580,13 @@ Tells openweave to include files that require heap access.
 From [//third_party/openweave-core/config.gni:32](https://fuchsia.googlesource.com/third_party/openweave-core/+/3203ab69f65bbc9a49e75c64c08b929e07cd02f4/config.gni#32)
 -->
 
-### 
+### config_have_heap
+告知 openweave 去引入需要堆存取的的文件.
+
+
+**当前值（默认值）：** `true`
+
+参见 [//third_party/openweave-core/config.gni:32](https://fuchsia.googlesource.com/third_party/openweave-core/+/3203ab69f65bbc9a49e75c64c08b929e07cd02f4/config.gni#32)
 
 <!--
 ### conformance_testing_netstack
@@ -1532,7 +1597,14 @@ If true, uses a netstack tailored for network conformance testing.
 From //src/connectivity/network/BUILD.gn:13
 -->
 
-### 
+### conformance_testing_netstack
+如果设为 true, 则使用定制的网络栈进行网络一致性测试.
+
+
+**当前值（默认值）：** `false`
+
+参见 //src/connectivity/network/BUILD.gn:13
+
 
 <!--
 ### core_realm_package_name
